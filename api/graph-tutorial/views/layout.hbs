@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>We schedule you the best by syncing with your meetings</title>
+    <title>Know your schedule and collaborate with your mentor</title>
 
     <link rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
@@ -16,7 +16,7 @@
   <body>
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
       <div class="container">
-        <a href="/" class="navbar-brand">We schedule you the best by syncing with your meetings</a>
+        <a href="/" class="navbar-brand">Know your schedule and collaborate with your mentor</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
           aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -33,11 +33,7 @@
             {{/if}}
           </ul>
           <ul class="navbar-nav justify-content-end">
-            <li class="nav-item">
-              <a class="nav-link" href="https://developer.microsoft.com/graph/docs/concepts/overview" target="_blank">
-                <i class="fas fa-external-link-alt mr-1"></i>Docs
-              </a>
-            </li>
+
             {{#if user}}
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
@@ -56,9 +52,7 @@
                 </div>
               </li>
             {{else}}
-              <li class="nav-item">
-                <a href="/auth/signin" class="nav-link">Sign In</a>
-              </li>
+
             {{/if}}
           </ul>
         </div>
