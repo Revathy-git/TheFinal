@@ -19,7 +19,7 @@
         <td>{{eventDateTime this.start.dateTime}}</td>
         <td>{{eventDateTime this.end.dateTime}}</td>
       </tr>
-     <p>{{#if @last}}You dont have any meetings after{{this.end.dateTime}}.Feel free to collaborate with your mentor{{/if}}</p>
+     <p>{{#if @last}}You dont have any meetings after{{eventDateTime this.end.dateTime}}.Feel free to collaborate with your mentor{{/if}}</p>
     {{/each}}
   </tbody>
 </table>
