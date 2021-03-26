@@ -31,6 +31,8 @@ router.get('/',
             // 07:00:00Z
             var startOfWeek = moment.tz(timeZoneId.valueOf()).startOf('week').utc();
             var endOfWeek = moment(startOfWeek).add(7, 'day');
+            var startOfDay = moment.tz(timeZoneId.valueOf()).startOf('day').utc();
+            var endOfDay = moment.tz(timeZoneId.valueOf()).endOf('day').utc();
             console.log(`Start: ${startOfWeek.format()}`);
 
             // Get the access token
@@ -58,6 +60,27 @@ router.get('/',
                 } catch (err) {
                     req.flash('error_msg', {
                         message: 'Could not fetch events',
+                        debug: JSON.stringify(err, Object.getOwnPropertyNames(err))
+                    });
+                }
+            }
+            else {
+                req.flash('error_msg', 'Could not get an access token');
+            }
+
+            if (accessToken && accessToken.length > 0) {
+                try {
+                    // Get the events
+                    const events = await graph.getCalendarView(
+                        accessToken,
+                        startOfDay.format(),
+                        endOfDay.format(),
+                        user.timeZone);
+
+                    params.dailyschedule = events.value;
+                } catch (err) {
+                    req.flash('error_msg', {
+                        message: 'Could not fetch daily events',
                         debug: JSON.stringify(err, Object.getOwnPropertyNames(err))
                     });
                 }
