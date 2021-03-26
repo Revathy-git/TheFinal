@@ -1,3 +1,4 @@
+const randomId = require('random-id');
 const Pool = require('pg').Pool
 const pool = new Pool({
     user: 'genesys',
@@ -29,8 +30,8 @@ const getUserById = (request, response) => {
 const createUser = (request, response) => {
     console.log(request.body.data);
     const { firstName, lastName, email, role } = request.body.data
-
-    pool.query('INSERT INTO users (firstname, lastname, email, role) VALUES ($1, $2, $3, $4)', [firstName, lastName, email, role], (error, results) => {
+    const id = randomId(5);
+    pool.query('INSERT INTO users (id, firstname, lastname, email, role) VALUES ($1, $2, $3, $4, $5)', [id, firstName, lastName, email, role], (error, results) => {
         if (error) {
             throw error
         }
