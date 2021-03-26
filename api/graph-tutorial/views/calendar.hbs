@@ -1,6 +1,7 @@
 <h1 class="mb-3">Calendar</h1>
 <a href="/calendar/new" class="btn btn-light btn-sm mb-3">Schedule a meeting with your mentor!</a>
-<h1>Your schedule for today!</h1>
+<h1>Your have {{dailyschedule.length}} meetings today!</h1>
+
 <table class="table">
   <thead>
     <tr>
@@ -18,6 +19,7 @@
         <td>{{eventDateTime this.start.dateTime}}</td>
         <td>{{eventDateTime this.end.dateTime}}</td>
       </tr>
+     <p>{{#if @last}}You dont have any meetings after{{this.end.dateTime}}.Feel free to collaborate with your mentor{{/if}}</p>
     {{/each}}
   </tbody>
 </table>
