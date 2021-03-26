@@ -6,9 +6,9 @@
             <div class="col-md-8">
                 <CreateUser @createUser="userCreate($event)" />
             </div>
-            <div class="col-md-4">
+            <!-- <div class="col-md-4">
                 <DisplayBoard :numberOfUsers="numberOfUsers" @getAllUsers="getAllUsers()" />
-            </div>
+            </div> -->
           </div>
     </div>
     <div class="row mrgnbtm">
@@ -20,7 +20,6 @@
 <script>
 import Header from './Header.vue'
 import CreateUser from './CreateUser.vue'
-import DisplayBoard from './DisplayBoard.vue'
 import Users from './Users.vue'
 import { getAllUsers, createUser } from '../services/UserService'
 
@@ -29,7 +28,6 @@ export default {
   components: {
     Header,
     CreateUser,
-    DisplayBoard,
     Users
   },
   data() {

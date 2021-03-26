@@ -2,7 +2,7 @@
   <div class="container">
     <div class="row">
         <div class="col-md-7 mrgnbtm">
-        <h2>Create User</h2>
+        <h2>Sign Up</h2>
             <form>
                 <div class="row">
                     <div class="form-group col-md-6">
@@ -20,7 +20,19 @@
                         <input type="text" class="form-control" v-model="email" name="email" id="email" aria-describedby="emailHelp" placeholder="Email" />
                     </div>
                 </div>
-                <button type="button" @click='createUser()' class="btn btn-danger">Create</button>
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <input type="radio" id="Mentor" value="Mentor" v-model="role">
+                        <label for="Mentor">Mentor</label>
+                        &nbsp;
+                        <input type="radio" id="Mentee" value="Mentee" v-model="role">
+                        <label for="Mentee">Mentee</label>
+
+                    </div>
+                </div>
+                <button type="button" @click='createUser()' class="btn btn-danger">SignUp</button>&nbsp;
+                <router-link to="overview" tag="button" class="btn btn-danger">Login</router-link>
+                
             </form>
         </div>
     </div>
@@ -34,7 +46,8 @@ export default {
     return {
       firstName: '',
       lastName: '',
-      email: ''
+      email: '',
+      role: ''
     }
   },
   methods: {
@@ -44,10 +57,11 @@ export default {
               firstName: this.firstName,
               lastName: this.lastName,
               email: this.email,
-              role: this.email
+              role: this.role
           }
           this.$emit('createUser', payload)
           this.clearForm();
+          this.$router.push({name: 'HomeScreen'})
       },
       clearForm() {
           this.firstName = "";
