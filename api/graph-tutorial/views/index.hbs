@@ -1,0 +1,10 @@
+<div class="jumbotron">
+  <h1></h1>
+  <p class="lead"></p>
+  {{#if user}}
+    <h4>Welcome {{ user.displayName }}!</h4>
+    <p>Use calendar and learn smart with your mentor</p>
+  {{else}}
+    <a href="/auth/signin" class="btn btn-primary btn-large">Lets get started</a>
+  {{/if}}
+</div>
