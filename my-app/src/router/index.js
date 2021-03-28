@@ -5,6 +5,8 @@ import Overview from '@/views/Overview.vue'
 import Dashboard from '@/components/Dashboard.vue'
 import HomeScreen from '@/views/HomeScreen.vue'
 import Leaderborad from '@/views/Leaderboard.vue'
+import Profile from '@/views/Profile.vue'
+import EditProfile from '@/views/EditProfile.vue'
 
 Vue.use(VueRouter)
 
@@ -32,6 +34,16 @@ const router = new VueRouter({
       path: '/overview/leaderboard',
       name: 'Leaderborad',
       component: Leaderborad
+    },
+    {
+      path: '/overview/profile',
+      name: 'Profile',
+      component: Profile
+    },
+    {
+      path: '/overview/editprofile',
+      name: 'EditProfile',
+      component: EditProfile
     }
   ]
 })

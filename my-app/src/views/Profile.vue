@@ -2,7 +2,7 @@
  <div id="app">
    <nav class="main-nav">
      <div class="logo">
-       HomePage
+       My Profile
      </div>
      <Burger></Burger>
    </nav>
@@ -12,13 +12,22 @@
        <button type="button" @click='clickHome()' class="btn btn-danger">Home</button><br><br>
        <button type="button" @click='clickNotifications()' class="btn btn-danger">Notifications</button><br><br>
        <button type="button" @click='clickLeaderBoard()' class="btn btn-danger">Leaderborad</button><br><br>
-       <button type="button" @click='clickProfile()' class="btn btn-danger">Profile</button><br><br>
      </ul>
    </Sidebar>
 
-   <div>
-        
-   </div>
+  <div class="Personal Info">
+      <th scope="row">Name:&emsp;{{firstName}}{{lastName}}</th><br>
+      <th scope="row">Email:{{email}}</th>&nbsp;<br>
+
+      <th scope="row">Age:{{age}}</th><br>
+      <th scope="row">Role In Genesys:{{role}}</th><br>
+      <th scope="row">Skills:{{Skills}}</th><br>
+      <th scope="row">Interests:{{interests}}</th><br>
+      <th scope="row">Personal Mail Id:{{personalMail}}</th><br>
+      <th scope="row">Contact:{{contact}}</th><br>
+  </div>  
+  <router-link to="EditProfile" tag="button" class="btn btn-danger">EditProfile</router-link>
+
  </div>
 </template>
 
@@ -28,6 +37,20 @@ import Sidebar from '@/components/Menu/Sidebar.vue';
 
 export default {
  name: 'app',
+  data() {
+    return {
+      firstName: '',
+      lastName: '',
+      email: '',
+      //profilepic:'',
+      age:'',
+      role: '',
+      skills:'',
+      interests:'',
+      personalMail:'',
+      contact:''
+    }
+  }, 
  methods: {
       clickHome() {
           console.log(this.$route.query.page)
@@ -36,17 +59,26 @@ export default {
       clickLeaderBoard() {
           this.$router.push({name: 'Leaderborad'})
       },
-      clickProfile() {
-          this.$router.push({name: 'Profile'})
+      getProfileInfo () {
+        console.log(this.firstName)
+        console.log(this.lastName)
+        console.log(this.email)
+        console.log(this.age)
+        console.log(this.role)
+        console.log(this.skills)
+        console.log(this.interests)
+        console.log(this.personalMail)
+        console.log(this.contact)
       }
   },
+  
  components: {
    Burger,
    Sidebar
  }
 }
-</script>
 
+</script>
 <style>
 html {
    height: 100%;
