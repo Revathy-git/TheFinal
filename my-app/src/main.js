@@ -6,6 +6,7 @@ import { BootstrapVue } from 'bootstrap-vue'
 
 
 Vue.config.productionTip = false
+Vue.prototype.$first = "aaa";
 
 new Vue({
   router,
