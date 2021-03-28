@@ -150,6 +150,7 @@ export default {
       },
       clickProfile() {
           this.$router.push({name: 'Profile'})
+      },
       getCourses(){
         
         this.courseCompleted=false
