@@ -2,7 +2,7 @@
  <div id="app">
    <nav class="main-nav">
      <div class="logo">
-       Welcome {{first}}
+       Your View
      </div>
      <Burger></Burger>
    </nav>
@@ -20,22 +20,36 @@
    <div>
         <section>
           <article>
-            <!--<h1 class="statush1">Post your status</h1>
-            <p>I will feeling good today</p>-->
-            <form>
-              <div class="statustextbox">
-                <label htmlFor="exampleInputEmail1">Post your status</label>
-                <input type="text" class="form-control" v-model="status" name="status" id="status" aria-describedby="emailHelp" placeholder="how are you doing now" />
-                <input type="submit" value="Post">
-              </div>
-              <!--<input type="text" id="status" name="status">-->
-              
-            </form>
-            <div>
-              
+            <div v-if="courseInProgress">
+              <h1>Goals Assigned</h1>
+              <!--<h2>All Goals</h2>
+              <ul>
+                  <li v-for="task in tasklist" v-bind:key="task" v-text="task.description"></li>
+              </ul>-->
+              <h2>All goals</h2>
+              <ul>
+                  <li v-for="task in inCompletedlist" v-bind:key="task">{{ task.description }}  
+                  <!--<button @click="startProgress(task)" v-if="changebutton">StartProgress</button>
+                  <button class="changebutton" v-else>StartProgress</button>-->
+                  <button @click="toggle(task)">Mark as finished</button></li>
+              </ul>
+              <h2>All complete goals</h2>
+              <ul>
+                  <li v-for="task in Completedlist" v-bind:key="task">{{ task.description }}  <button @click="toggle(task)">Mark as unfinished</button></li>
+              </ul>
+              <button type="button" @click='getQuestions()'>Take Assessment</button>
             </div>
-            
+            <div v-else>
+              <h1>Final Review</h1>
+              <tr v-for="item in rowData" v-bind:key="item">
+                <th scope="row">{{ item.question }}</th>
+                <input type="text" class="form-control" v-model="item.answer" name="item.answer" id="answer" placeholder="Answer" />
+                
+              </tr>
+              <button type="button" @click='submitAnswers()'>Submit</button>
+            </div>
           </article>
+          
           <nav class="right-nav">
             <ul>
               <div>
@@ -46,7 +60,7 @@
                 </div>
                 
               </div>
-              <button type="button" @click='getCourses()' class="ref-course-btn">RefreshCourse</button><br><br>
+              <button type="button" @click='getCourseCompletionList()' class="ref-course-btn">RefreshCourse</button><br><br>
             </ul>
           </nav>
       </section>
@@ -58,18 +72,68 @@
 import Burger from '@/components/Menu/Burger.vue';
 import Sidebar from '@/components/Menu/Sidebar.vue';
 import ApexCharts from 'vue-apexcharts'
+import { getCourses,getQuestionsService} from '../services/UserService'
 
 export default {
  name: 'app1',
+ beforeCreate(){
+   this.tasklist = [{description: 'Go somewhere', completed:false},
+          {description: 'Go here', completed:false},
+          {description: 'Go there', completed:false},
+          {description: 'Go anywhere', completed:false},]
+ },
+ 
+ /*created(){
+   console.log("beforeCreate")
+   getCourses(this.first).then(response => {
+        console.log("getCourses",response)
+        this.courses = response
+        this.tasklist = []
+        for (var i = 0; i < this.courses.length; i++) {
+          console.log("getCourses---",this.courses[i])
+          this.tasklist[i] = {}
+          this.tasklist[i]["description"] = this.courses[i]
+          this.tasklist[i]["completed"] = true
+      }
+      
+      })
+   console.log("beforeCreate:::",this.courses)
+ },*/
  mounted() {
       console.log("mounted",this.$first);
       this.first = this.$first;
+      //this.$emit('getCourses', this.first)
+      //this.tasklist = []
+      //this.getCourses();
+      //console.log("mounted:::",this.courses)
+      this.tasklist = [{description: 'Go somewhere', completed:false},
+          {description: 'Go here', completed:false},
+          {description: 'Go there', completed:false},
+          {description: 'Go anywhere', completed:false},]
+      
+
+      //getting getQuestions
+      /*getQuestionsService().then(response => {
+        for (var i = 0; i < response.length; i++) {
+          this.addQuestion(response[i])
+        }
+      })*/
+
+      //this.addQuestion("q1")
+      //this.addQuestion("q2")
+      //this.addQuestion("q3")
     },
  data() {
    return {
       status: '',
       first: this.$first,
       courseCompleted: true,
+      courseInProgress: true,
+      tasklist:this.tasklist,
+      question:"",
+      answer:"",
+      changebutton: true,
+      rowData:[],
       series: [44, 55, 41],
           chartOptions: {
             chart: {
@@ -148,16 +212,70 @@ export default {
       clickLeaderBoard() {
           this.$router.push({name: 'Leaderborad'})
       },
-      clickProfile() {
-          this.$router.push({name: 'Profile'})
-      getCourses(){
-        
+      getCourseCompletionList(){
         this.courseCompleted=false
-        //call api to refresh the window
+        //TODO: api to get course completion
+      },
+      getQuestions(){
+        this.courseInProgress=false
+        console.log("getQuestions method")
+        getQuestionsService().then(response => {
+        for (var i = 0; i < response.length; i++) {
+          this.addQuestion(response[i])
+        }
+        })
+        
+      },
+      getCourses(){
         //this.$emit('getCourseDetails')
+        getCourses(this.first).then(response => {
+        console.log("getCourses",response)
+        this.courses = response
+        this.tasklist = []
+        for (var i = 0; i < this.courses.length; i++) {
+          console.log("getCourses---",this.courses[i])
+          this.tasklist[i] = {}
+          this.tasklist[i]["description"] = this.courses[i]
+          this.tasklist[i]["completed"] = false
+      }
+      console.log("getCourses---",this.tasklist)
+      })
       },
       clickMenteeView(){
         this.$router.push({name: 'Mentee'})
+      },
+      toggle(task){
+        console.log("toggle---",this.tasklist)
+        task.completed = !task.completed;
+        this.tasklist.filter( task => ! task.completed );
+      },
+      startProgress(){
+        //task.completed = false;
+        this.changebutton = false
+      },
+      addQuestion(ques,ans){
+        var my_object = {
+          question:ques,
+          answer:ans
+        };
+        this.rowData.push(my_object)
+
+        this.question = '';
+        this.answer = '';
+        
+    },
+    submitAnswers(){
+      console.log(this.rowData[0]["answer"])
+      //TODO: save answers to db
+    }
+  },
+  computed:{
+      inCompletedlist(){
+          console.log("inCompletedlist---",this.tasklist)
+          return this.tasklist.filter( task => ! task.completed );
+      },
+      Completedlist(){
+          return this.tasklist.filter( task => task.completed);
       }
   },
  components: {
@@ -233,7 +351,7 @@ article {
   padding: 20px;
   width: 70%;
   background-color: #f1f1f1;
-  height: 200px; /* only for demonstration, should be removed */
+  height: 500px; /* only for demonstration, should be removed */
 }
 
 .statush1{
@@ -270,5 +388,9 @@ article {
   position: absolute;
   top: 55%;
   right: 11%
+}
+
+.changebutton{
+  color: white;
 }
 </style>
