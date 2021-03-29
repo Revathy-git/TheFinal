@@ -19,10 +19,28 @@
         <td>{{eventDateTime this.start.dateTime}}</td>
         <td>{{eventDateTime this.end.dateTime}}</td>
       </tr>
-     <p>{{#if @last}}You dont have any meetings after{{eventDateTime this.end.dateTime}}.Feel free to collaborate with your mentor{{/if}}</p>
+
     {{/each}}
   </tbody>
 </table>
+<br><h3>See your available slots in this week to collaborate with mentor!</h3><br>
+<table class="table">
+
+  <tbody>
+     <tr>
+        {{#each daysOfWeek}}
+            <td>{{this}}</td>
+        {{/each}}
+     </tr>
+     <tr>
+        {{#each availableSlots}}
+            <td>{{this}}</td>
+        {{/each}}
+     </tr>
+  </tbody>
+</table>
+
+
 <h1>Your schedule for this week!</h1>
 <table class="table">
   <thead>

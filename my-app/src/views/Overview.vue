@@ -12,7 +12,8 @@
        <router-link to="overview/home" tag="li" class="btn btn-danger">Home</router-link><br><br>
        <router-link to="overview/calendar" tag="li" class="btn btn-danger">Calendar</router-link><br><br>
        <router-link to="overview/leaderboard" tag="li" class="btn btn-danger">LeaderBoard</router-link><br><br>
-       <router-link to="overview/profile" tag="li" class="btn btn-danger">Profile</router-link>
+       <router-link to="overview/profile" tag="li" class="btn btn-danger">Profile</router-link><br><br>
+          <a href="http://localhost:3000/mail" tag="li" class="btn btn-danger">Monthly Summary</a>
      </ul>
    </Sidebar>
  </div>

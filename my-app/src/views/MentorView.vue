@@ -1,0 +1,164 @@
+<template>
+ <div id="app">
+   <nav class="main-nav">
+     <div class="logo">
+       Mentee Progress
+     </div>
+     <Burger></Burger>
+   </nav>
+
+   <Sidebar>
+     <ul class="sidebar-panel-nav">
+       <button type="button" @click='clickHome()' class="btn btn-danger">Home</button><br><br>
+       <button type="button" @click='clickNotifications()' class="btn btn-danger">Notifications</button><br><br>
+       <button type="button" @click='clickLeaderBoard()' class="btn btn-danger">Leaderborad</button><br><br>
+       <button type="button" @click='clickMentorView()' class="btn btn-danger">Mentee View</button><br><br>
+       <button type="button" @click='clickProfile()' class="btn btn-danger">Profile</button><br><br>
+          <a href="http://localhost:3000/mail" tag="li" class="btn btn-danger">Monthly Summary</a>
+     </ul>
+   </Sidebar>
+   
+   <section>
+          
+            <!--<h1>Your Mentees</h1>-->
+            <br>
+            <tr>
+              <div class="card">
+                <!--<img src="img1.jpg" alt="Girl in a jacket" style="width:100%">-->
+                <div class="container">
+                  <h4><b>Revathy E</b></h4> 
+                  <p>Software Engineer</p> 
+                  <label for="file">Goal Completion progress:</label>
+                  <progress id="file" value="32" max="100"> 32% </progress>
+                </div>
+              </div>
+            </tr>
+            <br>
+            <tr>
+              <div class="card">
+                <!--<img src="img1.jpg" alt="Avatar" style="width:100%">-->
+                <div class="container">
+                  <h4><b>Manonmani S</b></h4> 
+                  <p>Associate Software Engineer</p> 
+                  <label for="file">Goal Completion progress:</label>
+                  <progress id="file" value="70" max="100"> 32% </progress>
+                </div>
+              </div>
+            </tr>
+         
+   </section>       
+ </div>
+</template>
+
+<script>
+import Burger from '@/components/Menu/Burger.vue';
+import Sidebar from '@/components/Menu/Sidebar.vue';
+
+export default {
+ name: 'app',
+ methods: {
+      clickHome() {
+          console.log(this.$route.query.page)
+          this.$router.push({name: 'HomeScreen'})
+      },
+      clickLeaderBoard() {
+          this.$router.push({name: 'Leaderborad'})
+      },
+      clickMentorView(){
+        this.$router.push({name: 'Mentor'})
+      }
+  },
+ components: {
+   Burger,
+   Sidebar
+ }
+}
+</script>
+
+<style>
+html {
+   height: 100%;
+   overflow:hidden;
+ }
+
+ body {
+   border: 0; margin: 0; padding: 0;
+   font-family: 'Lato';
+   height: 100%;
+   background: rgb(101,31,87);
+   background: linear-gradient(45deg, rgba(101,31,87,1) 0%, rgba(225,113,87,1) 48%, rgba(249,248,113,1) 100%);
+ }
+
+ .logo {
+   align-self: center;
+   color: #fff;
+   font-weight: bold;
+   font-family: 'Lato'
+ }
+
+ .main-nav {
+   display: flex;
+   justify-content: space-between;
+   padding: 0.5rem 0.8rem;
+ }
+
+ ul.sidebar-panel-nav {
+   list-style-type: none;
+ }
+
+ ul.sidebar-panel-nav > li > a {
+   color: #fff;
+   text-decoration: none;
+   font-size: 1.5rem;
+   display: block;
+   padding-bottom: 0.5em;
+ }
+
+ section::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.right-nav {
+  float: right;
+  width: 30%;
+  height: 400px; /* only for demonstration, should be removed */
+  background: #ccc;
+  padding: 20px;
+}
+
+/* Style the list inside the menu */
+nav ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+article1 {
+  float: center;
+  padding: 20px;
+  width: 90%;
+  background-color: #f1f1f1;
+  height: 700px; /* only for demonstration, should be removed */
+}
+
+.statush1{
+  text-align: left;
+  //text-transform: uppercase;
+  color: #4CAF50;
+}
+
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  width: 400%;
+}
+
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.container {
+  padding: 2px 16px;
+}
+</style>

@@ -14,13 +14,14 @@
        <button type="button" @click='clickLeaderBoard()' class="btn btn-danger">Leaderboard</button><br><br>
        <button type="button" @click='clickMenteeView()' class="btn btn-danger">Mentee View</button><br><br>
        <button type="button" @click='clickProfile()' class="btn btn-danger">Profile</button><br><br>
+          <a href="http://localhost:3000/mail" tag="li" class="btn btn-danger">Monthly Summary</a>
      </ul>
    </Sidebar>
 
-   <div>
+   <div crossorigin="anonymous">
         <section>
           <article>
-            <div v-if="courseInProgress">
+            <div v-if="courseInProgress" crossorigin="anonymous">
               <h1>Goals Assigned</h1>
               <!--<h2>All Goals</h2>
               <ul>
@@ -42,25 +43,34 @@
             <div v-else>
               <h1>Final Review</h1>
               <tr v-for="item in rowData" v-bind:key="item">
-                <th scope="row">{{ item.question }}</th>
-                <input type="text" class="form-control" v-model="item.answer" name="item.answer" id="answer" placeholder="Answer" />
+                <th scope="row">{{ item.question }}</th>&nbsp;<br>
+                <!--<input type="text" class="form-control" v-model="item.answer" name="item.answer" id="answer" placeholder="Answer" />-->
+                <textarea align = "center" rows="4" cols="50" v-model="item.answer" name="item.answer" form="usrform"/>&nbsp;&nbsp;&nbsp;
+                <!--<button type="button" @click='validateAnswer(item)'>Validate</button>-->
                 
               </tr>
+            
               <button type="button" @click='submitAnswers()'>Submit</button>
-            </div>
+              <div v-if="validateAns">
+              </div>
+              <div v-else>
+                <p v-for="task in rowData1" v-bind:key="task">Correctness for question {{ task.number }} is {{ task.score }} </p>
+              </div>
+              
+              </div>
           </article>
           
           <nav class="right-nav">
             <ul>
               <div>
-                <h1 class="righth1">Course Progress</h1>
-                <p class="nocourse" v-if="courseCompleted">No course present</p>
+                <h1 class="righth1">Goal Progress</h1>
+                <p class="nocourse" v-if="courseCompleted">No goals assigned</p>
                 <div id="chart" v-else>
                   <apexchart type="donut" :options="chartOptions" :series="series"></apexchart>
                 </div>
                 
               </div>
-              <button type="button" @click='getCourseCompletionList()' class="ref-course-btn">RefreshCourse</button><br><br>
+              <button type="button" @click='getCourseCompletionList()' class="ref-course-btn">RefreshGoals</button><br><br>
             </ul>
           </nav>
       </section>
@@ -68,15 +78,41 @@
  </div>
 </template>
 
-<script>
+<script crossorigin="anonymous">
 import Burger from '@/components/Menu/Burger.vue';
 import Sidebar from '@/components/Menu/Sidebar.vue';
 import ApexCharts from 'vue-apexcharts'
-import { getCourses,getQuestionsService} from '../services/UserService'
+import { getCourses,getQuestionsService,validateAnswer} from '../services/UserService'
+import axios from 'axios';
+axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
 
 export default {
  name: 'app1',
  beforeCreate(){
+   /*axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
+   axios.get(`http://fce-u0263.us.int.genesyslab.com:5070/qa?topic=android`,
+      {
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Credentials': 'true'
+      },
+      proxy: {
+        host: 'http://fce-u0263.us.int.genesyslab.com',
+        port: 5070
+      }
+      })
+    .then(response => {
+      //response.header("Access-Control-Allow-Origin", "*");
+      // JSON responses are automatically parsed.
+      //this.posts = response.data
+      console.log("created11",response.data)
+      for (var i = 0; i < response.length; i++) {
+          this.addQuestion(response.data[i])
+        }
+    })
+    .catch(e => {
+      this.errors.push(e)
+    })*/
    this.tasklist = [{description: 'Go somewhere', completed:false},
           {description: 'Go here', completed:false},
           {description: 'Go there', completed:false},
@@ -106,10 +142,10 @@ export default {
       //this.tasklist = []
       //this.getCourses();
       //console.log("mounted:::",this.courses)
-      this.tasklist = [{description: 'Go somewhere', completed:false},
-          {description: 'Go here', completed:false},
-          {description: 'Go there', completed:false},
-          {description: 'Go anywhere', completed:false},]
+      this.tasklist = [{description: 'Should complete basic android course', completed:false},
+          {description: 'Should develop an android weather app', completed:false},
+          {description: 'Run an generate apk file', completed:false},
+          {description: 'Give a demo on creating android app', completed:false},]
       
 
       //getting getQuestions
@@ -133,8 +169,11 @@ export default {
       question:"",
       answer:"",
       changebutton: true,
+      score: true,
+      validateAns:true,
       rowData:[],
-      series: [44, 55, 41],
+      rowData1:[],
+      series: [2, 3, 2],
           chartOptions: {
             chart: {
               width: 380,
@@ -219,9 +258,14 @@ export default {
       getQuestions(){
         this.courseInProgress=false
         console.log("getQuestions method")
+        //this.addQuestion("What's the role of Google Play in compatibility?")
+        //this.addQuestion("What is the Android Open Source Project?")
+        //this.addQuestion("How can I get access to Google apps for Android, such as Maps?")
         getQuestionsService().then(response => {
-        for (var i = 0; i < response.length; i++) {
-          this.addQuestion(response[i])
+          console.log(response.samples)
+        for (var i = 0; i < response.samples.length; i++) {
+          console.log("dsdsd")
+          this.addQuestion(response.samples[i])
         }
         })
         
@@ -265,8 +309,69 @@ export default {
         
     },
     submitAnswers(){
-      console.log(this.rowData[0]["answer"])
+      console.log("submitAnswers",this.rowData[0]["question"])
       //TODO: save answers to db
+      var s1,s2=72.12,s3=55.54;
+      
+      
+      validateAnswer(this.rowData[0]["question"],this.rowData[0]["answer"]).then(response => {
+          console.log(response.score)
+          //item.score=response.score
+          console.log("item",response.score)
+          s1 = response.score
+          console.log("item11",s1)
+          this.rowData1.push({number:1,score:s1})
+        })
+        validateAnswer(this.rowData[1]["question"],this.rowData[1]["answer"]).then(response => {
+          console.log(response.score)
+          //item.score=response.score
+          console.log("item",response.score)
+          s2 = response.score
+          console.log("item11",s1)
+          this.rowData1.push({number:2,score:s2})
+        })
+        validateAnswer(this.rowData[2]["question"],this.rowData[2]["answer"]).then(response => {
+          console.log(response.score)
+          //item.score=response.score
+          console.log("item",response.score)
+          s3 = response.score
+          console.log("item11",s1)
+          this.rowData1.push({number:3,score:s3})
+        })
+        
+        console.log("item11111",s1)
+        
+        //this.rowData1.push({number:2,score:s2})
+        //this.rowData1.push({number:3,score:s3})
+      /*for (var j = 0; j < this.rowData.length; j++) {
+        console.log("item11",j)
+        validateAnswer(this.rowData[j]["question"],this.rowData[j]["answer"]).then(response => {
+          console.log(response.score)
+          //item.score=response.score
+          //console.log("item",item.score)
+          var my_object=[]
+          my_object = {
+            number:j,
+            score:response.score
+          };
+          console.log("item",j)
+          this.rowData1.push(my_object)
+          
+        })
+      }*/
+      
+      this.validateAns=false
+    },
+    validateAnswer(item){
+      console.log("question",item.question)
+      console.log("answer",item.answer)
+      validateAnswer(item.question,item.answer).then(response => {
+          console.log(response.score)
+          item.score=response.score
+          console.log("item",item.score)
+          this.validate=false
+          this.score=false
+        })
     }
   },
   computed:{
@@ -351,7 +456,7 @@ article {
   padding: 20px;
   width: 70%;
   background-color: #f1f1f1;
-  height: 500px; /* only for demonstration, should be removed */
+  height: 700px; /* only for demonstration, should be removed */
 }
 
 .statush1{
@@ -392,5 +497,9 @@ article {
 
 .changebutton{
   color: white;
+}
+
+.textarea{
+
 }
 </style>

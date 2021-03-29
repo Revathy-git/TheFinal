@@ -4,7 +4,7 @@ const moment = require('moment-timezone');
 const iana = require('windows-iana');
 const { body, validationResult } = require('express-validator');
 const validator = require('validator');
-
+const fetch = require('node-fetch');
 /* GET /calendar */
 /* GET /calendar */
 router.get('/',
@@ -88,6 +88,17 @@ router.get('/',
             else {
                 req.flash('error_msg', 'Could not get an access token');
             }
+
+            var response = await fetch("http://fce-u0263.us.int.genesyslab.com:5080/verify_calendar?email=Revathy.Elankumaran@genesys.com");
+            if (response.ok) { // if HTTP-status is 200-299
+                               // get the response body (the method explained below)
+                let json = await response.json();
+                params.availableSlots = json.slots;
+            } else {
+                alert("HTTP-Error: " + response.status);
+            }
+            var daysOfWeek = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+            params.daysOfWeek = daysOfWeek;
 
             res.render('calendar', params);
         }

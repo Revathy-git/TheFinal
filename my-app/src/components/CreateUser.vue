@@ -70,7 +70,7 @@ export default {
               email: this.email,
               role: this.role
           }
-          this.$emit('createUser', payload)
+          //this.$emit('createUser', payload)
           this.$router.push({name: 'HomeScreen'})
       },
       createUser() {

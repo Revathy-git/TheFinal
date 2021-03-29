@@ -12,6 +12,7 @@
        <button type="button" @click='clickHome()' class="btn btn-danger">Home</button><br><br>
        <button type="button" @click='clickNotifications()' class="btn btn-danger">Notifications</button><br><br>
        <button type="button" @click='clickLeaderBoard()' class="btn btn-danger">Leaderborad</button><br><br>
+          <a href="http://localhost:3000/mail" tag="li" class="btn btn-danger">Monthly Summary</a>
      </ul>
    </Sidebar>
 
