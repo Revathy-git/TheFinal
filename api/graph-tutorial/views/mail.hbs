@@ -20,4 +20,20 @@
 </table>
 
 <h2>Final summary</h2>
-<td>{{this.final_msg}}</td>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Subject</th>
+      <th scope="col">Summary</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each fin}}
+      <tr>
+        <td>{{@key}}</td>
+        <td>{{this}}</td>
+      </tr>
+
+    {{/each}}
+  </tbody>
+</table>
