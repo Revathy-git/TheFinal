@@ -8,6 +8,7 @@ import Leaderborad from '@/views/Leaderboard.vue'
 import Profile from '@/views/Profile.vue'
 import EditProfile from '@/views/EditProfile.vue'
 import MenteeView from '@/views/MenteeView.vue'
+import MentorView from '@/views/MentorView.vue'
 
 Vue.use(VueRouter)
 
@@ -50,6 +51,11 @@ const router = new VueRouter({
       path: '/overview/mentee',
       name: 'Mentee',
       component: MenteeView
+    },
+    {
+      path: '/overview/mentor',
+      name: 'Mentor',
+      component: MentorView
     }
   ]
 })
