@@ -22,17 +22,15 @@ export async function createUser(data) {
     return await response.json();
 }
 
-
 export async function updateProfileInfobyId(data) {
     console.log("inside service")
-    const response = await fetch('/api/usersUpdate', {
+    const response = await fetch(`/api/usersUpdate/${data.firstName}`, {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({data})
     })
     return await response.json();
-}
-
+ }
 
 export async function getCourses(firstName) {
     // const response = await fetch(`/api/users`, {
@@ -79,5 +77,17 @@ export async function validateAnswer(question,answer){
     console.log("ddd",JSON.stringify({data}))
     return data
     //return {"code": "0", "score": 64.42}
+}
+
+export async function getMyMentor(payload){
+    console.log("inside getMyMentor")
+    const response = await fetch(`http://fce-u0263.us.int.genesyslab.com:5071/match?category=2&bio=${payload.interests}`, {
+        method: "GET",
+         })
+    const data = await response.json();
+    console.log("ddd",JSON.stringify({data}))
+    return data
+    //console.log("getQuestions method",firstName)
+    //return ["q111","q222"]
 
 }
