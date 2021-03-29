@@ -10,7 +10,7 @@
    <Sidebar>
      <ul class="sidebar-panel-nav">
        <router-link to="overview/home" tag="li" class="btn btn-danger">Home</router-link><br><br>
-       <router-link to="overview/calendar" tag="li" class="btn btn-danger">Calendar</router-link><br><br>
+       <a href="http://localhost:3000/calendar" tag="li" class="btn btn-danger">Calendar</a><br><br>
        <a href="http://172.24.135.111:8082/leaderboard.html" tag="li" class="btn btn-danger">LeaderBoard</a><br><br>
        <router-link to="overview/profile" tag="li" class="btn btn-danger">Profile</router-link><br><br>
           <a href="http://localhost:3000/mail" tag="li" class="btn btn-danger">Monthly Summary</a>

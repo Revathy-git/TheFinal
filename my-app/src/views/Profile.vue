@@ -10,7 +10,7 @@
    <Sidebar>
      <ul class="sidebar-panel-nav">
        <button type="button" @click='clickHome()' class="btn btn-danger">Home</button><br><br>
-       <button type="button" @click='clickNotifications()' class="btn btn-danger">Notifications</button><br><br>
+       <a href="http://localhost:3000/calendar" tag="li" class="btn btn-danger">Calendar</a><br><br>
        <a href="http://172.24.135.111:8082/leaderboard.html" tag="li" class="btn btn-danger">LeaderBoard</a><br><br>
           <a href="http://localhost:3000/mail" tag="li" class="btn btn-danger">Monthly Summary</a>
      </ul>
