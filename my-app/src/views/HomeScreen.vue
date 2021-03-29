@@ -27,14 +27,16 @@
             <form>
               <div class="statustextbox">
                 <label htmlFor="exampleInputEmail1">Post your status</label>
-                <input type="text" class="form-control" v-model="status" name="status" id="status" aria-describedby="emailHelp" placeholder="how are you doing now" />
-                <input type="submit" value="Post">
+                <input type="text" class="form-control" v-model="req_sentence" name="req_sentence" id="req_sentence" aria-describedby="emailHelp" placeholder="how are you doing now" />
+                <button type="button" @click='showStatus()'>Give Suggestion</button>
+                <button type="button" @click='postUpdate()'>Post Update</button>
               </div>
-              <!--<input type="text" id="status" name="status">-->
-              
             </form>
-            <div>
-              
+            <div v-if="res_data">
+              <p>
+                {{ res_data }}
+                <button type="button" @click='showAnotherStatus()'>More Suggestion</button>
+              </p>
             </div>
             
           </article>
@@ -70,6 +72,9 @@ export default {
  data() {
    return {
       status: '',
+      req_sentence: '',
+      response_text: '',
+      res_data: '',
       first: this.$first,
       courseCompleted: true,
       series: [2, 3, 2],
@@ -164,6 +169,42 @@ export default {
       },
       clickMentorView(){
         this.$router.push({name: 'Mentor'})
+      },
+      async showStatus(){
+        var myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+        myHeaders.append("Access-Control-Allow-Origin", "*");
+        var raw = JSON.stringify({
+          "sentence": this.req_sentence
+        });
+        var requestOptions = {
+          method: 'POST',
+          headers: myHeaders,
+          body: raw,
+          redirect: 'follow'
+        };
+        const res = await fetch("http://fce-u0263.us.int.genesyslab.com:5070/confidence", requestOptions)
+        console.log(res); 
+        const data = await res.json();
+        this.res_data = data.message[0];
+      },
+      async showAnotherStatus(){
+        var myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+        myHeaders.append("Access-Control-Allow-Origin", "*");
+        var raw = JSON.stringify({
+          "sentence": this.req_sentence
+        });
+        var requestOptions = {
+          method: 'POST',
+          headers: myHeaders,
+          body: raw,
+          redirect: 'follow'
+        };
+        const res = await fetch("http://fce-u0263.us.int.genesyslab.com:5070/confidence", requestOptions)
+        console.log(res); 
+        const data = await res.json();
+        this.res_data = data.message[1];
       }
   },
  components: {
