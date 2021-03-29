@@ -11,16 +11,7 @@
    </Sidebar>
 
   <div class="Personal Info">
-      <div class="row">
-                    <div class="form-group col-md-2">
-                        <label htmlFor="examplefirstname">firstname</label>
-                        <input type="text" class="form-control" v-model="firstName" name="firstName" id="firstName" aria-describedby="emailHelp" placeholder="firstName" />
-                    </div>
-                    <div class="form-group col-md-2">
-                        <label htmlFor="examplelastname">lastname</label>
-                        <input type="text" class="form-control" v-model="lastName" name="lastName" id="lastName" aria-describedby="emailHelp" placeholder="lastName" />
-                    </div>
-      </div>
+
       <div class="column">
                     <div class="form-group col-md-5">
                         <label htmlFor="exampleInputEmail1">Email</label>
@@ -58,9 +49,21 @@
                         <input type="text" class="form-control" v-model="contact" name="contact" id="contact" aria-describedby="emailHelp" placeholder="contact" />
                     </div>  
       </div>
+         <div class="row">
+                    <div class="form-group col-md-12">
+                        <input type="radio" id="Mentor" value="Mentor" v-model="role">
+                        <label for="Mentor">Mentor</label>
+                        &nbsp;
+                        <input type="radio" id="Mentee" value="Mentee" v-model="role">
+                        <label for="Mentee">Mentee</label>
+
+                    </div>
+    </div>
 
   </div>  
   <button type="button" @click='updateProfileInfobyId()' class="btn btn-danger">Save</button>&nbsp;
+  &nbsp;
+  <router-link to="Mentorassign" tag="button" class="btn btn-danger">next</router-link>
   &nbsp;
   <router-link to="Profile" tag="button" class="btn btn-danger">Cancel</router-link>
 
@@ -94,9 +97,9 @@ export default {
       },
       updateProfileInfobyId(){
           const payload = {
-              firstName: this.firstName,
-              lastName: this.lastName,
+
               email: this.email,
+              role:this.role,
               age:this.age,
               skills:this.skills,
               interests:this.interests,
@@ -117,6 +120,7 @@ export default {
           this.firstName = "";
           this.lastName = "";
           this.email = "",
+          this.role="",
           this.age= "",
           this.skills= "",
           this.interests= "",

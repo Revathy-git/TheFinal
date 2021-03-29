@@ -17,7 +17,7 @@
 
   <div class="Personal Info" id="info">
     <article>
-      <th scope="row">Name:&emsp;{{this.firstName}}{{lastName}}</th><br>
+      <th scope="row">Name:&emsp;{{firstName}}{{lastName}}</th><br>
       <th scope="row">Email:{{email}}</th>&nbsp;<br>
       <th scope="row">Role:{{role}}</th><br>
       <th scope="row">Age:{{age}}</th><br>
@@ -38,7 +38,8 @@
 
 import Burger from '@/components/Menu/Burger.vue';
 import Sidebar from '@/components/Menu/Sidebar.vue';
-import {getUserById } from '../services/UserService';
+
+import {getUserById } from '../services/UserService'
 
 
 
@@ -68,15 +69,25 @@ export default {
           this.$router.push({name: 'Leaderborad'})
       },
     getUserById() {
-      getUserById().then(response => {
-        console.log("profilecheck");
-        console.log(response);
-        //return {response}
- 
-      });
+      getUserById("mano").then(response => {
+        console.log("profilecheck",response);
+        this.firstName=this.$firstname;
+        this.lastName=this.$lastname;
+        this.email=this.$email;
+        this.role=this.$role;
+        this.age=this.$age;
+        this.skills=this.$skills;
+        this.interests=this.$interests;
+        this.personalMail=this.$personalmail;
+        this.contact=this.$contact;
+        this.job_title=this.$job_title; 
+        console.log("infofetch",this.role)
+
+      })
     }
   },
-    
+  
+
  components: {
    Burger,
    Sidebar

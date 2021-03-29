@@ -8,6 +8,8 @@ import Leaderborad from '@/views/Leaderboard.vue'
 import Profile from '@/views/Profile.vue'
 import EditProfile from '@/views/EditProfile.vue'
 import MenteeView from '@/views/MenteeView.vue'
+import Mentorassign from '@/views/Mentorassign.vue'
+
 
 Vue.use(VueRouter)
 
@@ -50,7 +52,12 @@ const router = new VueRouter({
       path: '/overview/mentee',
       name: 'Mentee',
       component: MenteeView
-    }
+    },
+    {
+    path: '/overview/mentorassign',
+    name: 'Mentorassign',
+    component: Mentorassign
+  }
   ]
 })
 

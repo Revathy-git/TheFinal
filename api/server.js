@@ -24,8 +24,7 @@ app.get('/', (request, response) => {
 })
 
 app.get('/users', db.getUsers)
-app.get('/users/:firstname', db.getUserById)
-app.get('/users/:firstname', db.getProfileInfobyId)
+app.get('api/users/:firstname', db.getUserById)
 app.post('/api/users', db.createUser)
 app.put('/users/:firstname', db.updateUser)
 app.post('/api/usersUpdate', db.updateProfileInfobyId)
