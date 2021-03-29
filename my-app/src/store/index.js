@@ -1,7 +1,12 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import Notifications from 'vue-notification'
+
+Vue.use(Notifications)
 
 Vue.use(Vuex)
+
+let notifier = new Vue()
 
 // save our state (isPanel open or not) 
 export const store = Vue.observable({
@@ -21,6 +26,10 @@ export default new Vuex.Store({
   mutations: {
   },
   actions: {
+      notify(context, payload){
+        console.log("notify",payload)
+        notifier.$notify(payload)
+    }
   },
   modules: {
   }
