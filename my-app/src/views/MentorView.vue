@@ -51,7 +51,18 @@
                 </div>
               </div>
             </tr>
-         
+            <br><br>
+              <nav class="click-chat">
+                <ul>
+                  <div>
+                    <h1 class="chat">Connecting people !!</h1>
+                        <div class="text-center">
+                          <a class="btn btn-success me-2" href="https://teams.microsoft.com/l/chat/0/0?users=revathy.elankumaran@genesys.com&topicName=Prep%20For%20Meeting%20Tomorrow&message=Hi%20revathy" target="_blank" role="button">Connect with your MENTEE🙂<i class="fas fa-download"></i></a> 
+                        </div>
+                  </div>
+                </ul>
+
+          </nav>   
    </section>       
  </div>
 </template>
@@ -119,6 +130,19 @@ html {
    display: block;
    padding-bottom: 0.5em;
  }
+
+  .chat{
+    text-align: middle;
+    font-size: 1.5rem;
+    color: #290320;
+  }
+  .click-chat{
+    float:left ;
+    width: 20%;
+    height: 100px; /* only for demonstration, should be removed */
+    background: #ccc;
+    padding: 20px;
+  }
 
  section::after {
   content: "";
