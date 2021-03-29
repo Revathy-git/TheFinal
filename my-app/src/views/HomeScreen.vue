@@ -13,6 +13,7 @@
        <button type="button" @click='clickNotifications()' class="btn btn-danger">Notifications</button><br><br>
        <button type="button" @click='clickLeaderBoard()' class="btn btn-danger">Leaderboard</button><br><br>
        <button type="button" @click='clickMenteeView()' class="btn btn-danger">Mentee View</button><br><br>
+       <button type="button" @click='clickMentorView()' class="btn btn-danger">Mentor View</button><br><br>
        <button type="button" @click='clickProfile()' class="btn btn-danger">Profile</button><br><br>
      </ul>
    </Sidebar>
@@ -39,14 +40,14 @@
           <nav class="right-nav">
             <ul>
               <div>
-                <h1 class="righth1">Course Progress</h1>
-                <p class="nocourse" v-if="courseCompleted">No course present</p>
+                <h1 class="righth1">Goals Progress</h1>
+                <p class="nocourse" v-if="courseCompleted">No goals assigned</p>
                 <div id="chart" v-else>
                   <apexchart type="donut" :options="chartOptions" :series="series"></apexchart>
                 </div>
                 
               </div>
-              <button type="button" @click='getCourses()' class="ref-course-btn">RefreshCourse</button><br><br>
+              <button type="button" @click='getCourses()' class="ref-course-btn">RefreshGoals</button><br><br>
             </ul>
           </nav>
       </section>
@@ -70,7 +71,7 @@ export default {
       status: '',
       first: this.$first,
       courseCompleted: true,
-      series: [44, 55, 41],
+      series: [2, 3, 2],
           chartOptions: {
             chart: {
               width: 380,
@@ -159,6 +160,9 @@ export default {
       },
       clickMenteeView(){
         this.$router.push({name: 'Mentee'})
+      },
+      clickMentorView(){
+        this.$router.push({name: 'Mentor'})
       }
   },
  components: {
