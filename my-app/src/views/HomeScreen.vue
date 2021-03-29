@@ -16,6 +16,7 @@
        <button type="button" @click='clickMentorView()' class="btn btn-danger">Mentor View</button><br><br>
        <button type="button" @click='clickProfile()' class="btn btn-danger">Profile</button><br><br>
           <a href="http://localhost:3000/mail" tag="li" class="btn btn-danger">Monthly Summary</a>
+
      </ul>
    </Sidebar>
 
@@ -37,6 +38,7 @@
                 {{ res_data }}
                 <button type="button" @click='showAnotherStatus()'>More Suggestion</button>
               </p>
+
             </div>
             
           </article>
@@ -52,7 +54,9 @@
               </div>
               <button type="button" @click='getCourses()' class="ref-course-btn">RefreshGoals</button><br><br>
             </ul>
+
           </nav>
+        
       </section>
    </div>
  </div>
@@ -163,6 +167,9 @@ export default {
         this.courseCompleted=false
         //call api to refresh the window
         //this.$emit('getCourseDetails')
+      },
+      gotoTeams(){
+       // this.$router.push({"name: 'toteams'"})        
       },
       clickMenteeView(){
         this.$router.push({name: 'Mentee'})
