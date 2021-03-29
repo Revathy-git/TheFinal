@@ -7,6 +7,7 @@ import HomeScreen from '@/views/HomeScreen.vue'
 import Leaderborad from '@/views/Leaderboard.vue'
 import Profile from '@/views/Profile.vue'
 import EditProfile from '@/views/EditProfile.vue'
+import MenteeView from '@/views/MenteeView.vue'
 
 Vue.use(VueRouter)
 
@@ -44,6 +45,11 @@ const router = new VueRouter({
       path: '/overview/editprofile',
       name: 'EditProfile',
       component: EditProfile
+    },
+    {
+      path: '/overview/mentee',
+      name: 'Mentee',
+      component: MenteeView
     }
   ]
 })
