@@ -2,7 +2,7 @@
  <div id="app">
    <nav class="main-nav">
      <div class="logo">
-       My Profile
+       My Profile  😀
      </div>
      <Burger></Burger>
    </nav>
@@ -16,6 +16,9 @@
      </ul>
    </Sidebar>
 
+   <h1 v-if="awesome">Vue is awesome!</h1>
+    <h1 v-else>✨Personal Info✨</h1>
+
   <div class="Personal Info" id="info">
     <article>
       <th scope="row">Name:&emsp;{{firstName}}{{lastName}}</th><br>
@@ -23,14 +26,14 @@
       <th scope="row">Role:{{role}}</th><br>
       <th scope="row">Age:{{age}}</th><br>
       <th scope="row">Role In Genesys:{{job_title}}</th><br>
-      <th scope="row">Skills:{{Skills}}</th><br>
+      <th scope="row">Skills:{{skills}}</th><br>
       <th scope="row">Interests:{{interests}}</th><br>
       <th scope="row">Personal Mail Id:{{personalMail}}</th><br>
       <th scope="row">Contact:{{contact}}</th><br>
     </article>
   </div>  
-  <button type="button" @click='getUserById()' class="btn btn-danger">show</button>&nbsp;
 
+  <button type="button" @click='getUserById()' class="btn btn-danger">show</button>&nbsp;
   <router-link to="EditProfile" tag="button" class="btn btn-danger">EditProfile</router-link>
 
  </div>
@@ -39,7 +42,6 @@
 
 import Burger from '@/components/Menu/Burger.vue';
 import Sidebar from '@/components/Menu/Sidebar.vue';
-
 import {getUserById } from '../services/UserService'
 
 
@@ -72,7 +74,7 @@ export default {
     getUserById() {
       getUserById("mano").then(response => {
         console.log("profilecheck",response);
-        this.firstName=this.$firstname;
+        this.firstName=response.firstname;
         this.lastName=this.$lastname;
         this.email=this.$email;
         this.role=this.$role;
@@ -82,7 +84,7 @@ export default {
         this.personalMail=this.$personalmail;
         this.contact=this.$contact;
         this.job_title=this.$job_title; 
-        console.log("infofetch",this.role)
+        return (this.firstname);
 
       })
     }

@@ -18,7 +18,20 @@ const getUsers = (request, response) => {
 
 const getUserById = (request, response) => {
     console.log("HELLO");
-    console.log(request.body.data);
+    console.log(request.params);
+    //console.log(request.body.data);
+    //const id = request.params.firstname
+    var id=request.params.info;
+    pool.query('SELECT * FROM users WHERE firstname = $1', [id], (error, results) => {
+        if (error) {
+            throw error
+        }
+        response.status(200).send(results.rows)
+        console.log("HELLOIN");
+        console.log(results);
+        //return results.rows;
+    })
+    console.log("HELLOOUT");
 
 }
 const updateProfileInfobyId = (request, response) => {

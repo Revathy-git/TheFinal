@@ -8,7 +8,8 @@ export async function getUserById(info) {
     console.log("userservicecheck",info);
     const response = await fetch(`/api/users/${info}`);
     const data = await response.json();
-    console.log("ddd",JSON.stringify({data}))
+    console.log("info",JSON.stringify({data}))
+    console.log("userservicecheck",info);
     return data
 }
 
@@ -31,6 +32,8 @@ export async function updateProfileInfobyId(data) {
     })
     return await response.json();
 }
+
+
 export async function getCourses(firstName) {
     // const response = await fetch(`/api/users`, {
     //     method: 'POST',
