@@ -449,9 +449,9 @@ html {
    color: #290320;
 }
 .click-chat{
-  float:left ;
-  width: 20%;
-  height: 100px; /* only for demonstration, should be removed */
+  float:right ;
+  width: 50%;
+  height: 200px; /* only for demonstration, should be removed */
   background: #ccc;
   padding: 20px;
 }
