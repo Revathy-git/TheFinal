@@ -14,8 +14,9 @@
 
       <div class="column">
                     <div class="form-group col-md-5">
-                        <label htmlFor="exampleInputEmail1">Email</label>
-                        <input type="text" class="form-control" v-model="email" name="email" id="email" aria-describedby="emailHelp" placeholder="email" />
+                        <label htmlFor="exampleInputEmail1">Email:</label>&nbsp;
+                        <label htmlFor="exampleInputEmail1">{{emailLogin}}</label>
+                        <!--<input type="text" class="form-control" v-model="email" name="email" id="email" aria-describedby="emailHelp" placeholder="email" />-->
                     </div>
       </div>
       <div class="row">
@@ -63,9 +64,10 @@
   </div>  
   <button type="button" @click='updateProfileInfobyId()' class="btn btn-danger">Save</button>&nbsp;
   &nbsp;
-  <router-link to="Mentorassign" tag="button" class="btn btn-danger">next</router-link>
+  <!--<router-link to="Mentorassign" tag="button" class="btn btn-danger">next</router-link>-->
+  <button type="button" @click='assignMentor()' class="btn btn-danger">Assign Mentor</button>&nbsp;
   &nbsp;
-  <router-link to="Profile" tag="button" class="btn btn-danger">Cancel</router-link>
+  <router-link to="Profile" tag="button" class="btn btn-danger">Back to Profile</router-link>
 
  </div>
 </template>
@@ -73,13 +75,27 @@
 <script>
 import Burger from '@/components/Menu/Burger.vue';
 import Sidebar from '@/components/Menu/Sidebar.vue';
-import {updateProfileInfobyId} from '../services/UserService';
+import {updateProfileInfobyId, getMyMentor} from '../services/UserService';
+import 'vuejs-noty/dist/vuejs-noty.css'
 
 export default {
  name: 'app',
+  mounted() {
+      console.log("mounted",this.$email);
+      this.first = this.$first;
+      this.emailLogin = this.$email;
+    },
    data() {
     return {
-
+      first: this.$first,
+      emailLogin: this.$email,
+      role: "",
+      age: "",
+      skills: "",
+      interests: "",
+      personalMail: "",
+      contact: "",
+      job_title: ""
     }
   },
  components: {
@@ -97,7 +113,7 @@ export default {
       },
       updateProfileInfobyId(){
           const payload = {
-
+              firstName: this.first,
               email: this.email,
               role:this.role,
               age:this.age,
@@ -108,13 +124,16 @@ export default {
               job_title:this.job_title
           }
           this.$emit('updateUser',payload)
-          this.clearForm();
+          //this.clearForm();
         
                    updateProfileInfobyId(payload).then(response => {
                    console.log(response);
                    //this.getAllUsers();
               });
-    
+          this.$notify({
+                group: 'foo',
+                title: 'Data saved'
+              });
       },
       clearForm() {
           this.firstName = "";
@@ -127,6 +146,22 @@ export default {
           this.personalMail= "",
           this.contact= "",
           this.job_title= "";
+      },
+      assignMentor(){
+        const payload = {
+              interests: this.interests
+          }
+        getMyMentor(payload).then(response => {
+          console.log(response.name)
+          this.$notify({
+          group: 'foo',
+          title: 'Mentor Assigned',
+          text: response.name
+        });
+        })  
+        //this.$vueNoty.show("Hello world!")
+        //this.$store.dispatch("notify", "Hello from Vuex")
+        
       }
       
   }

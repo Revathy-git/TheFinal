@@ -79,12 +79,12 @@
                 <h1 class="chat">Connecting people !!</h1>
                     <div class="text-center">
                       <a class="btn btn-success me-2" href="https://teams.microsoft.com/l/chat/0/0?users=maithili.jampana@genesys.com&topicName=Prep%20For%20Meeting%20Tomorrow&message=Hi%20maithili" target="_blank" role="button">Connect with your MENTOR🙂<i class="fas fa-download"></i></a>
- 
+
                     </div>
               </div>
             </ul>
 
-          </nav>          
+          </nav>      
       </section>
    </div>
  </div>
@@ -442,6 +442,7 @@ html {
    display: block;
    padding-bottom: 0.5em;
  }
+
 .chat{
    text-align: middle;
    font-size: 1.5rem;

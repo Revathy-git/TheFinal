@@ -21,18 +21,40 @@
 
   <div class="Personal Info" id="info">
     <article>
-      <th scope="row">Name:&emsp;{{firstName}}{{lastName}}</th><br>
-      <th scope="row">Email:{{email}}</th>&nbsp;<br>
-      <th scope="row">Role:{{role}}</th><br>
-      <th scope="row">Age:{{age}}</th><br>
-      <th scope="row">Role In Genesys:{{job_title}}</th><br>
-      <th scope="row">Skills:{{skills}}</th><br>
-      <th scope="row">Interests:{{interests}}</th><br>
-      <th scope="row">Personal Mail Id:{{personalMail}}</th><br>
-      <th scope="row">Contact:{{contact}}</th><br>
+      <th scope="row">Name:&emsp;</th><th>{{first}}</th><br>
+      <th scope="row">Email:</th><th>{{emailLogin}}</th><br>
+      <th scope="row">Role:</th>
+      <th v-if="displayRole"></th>
+      <th v-else>{{role}}</th>
+      <br>
+      <th scope="row">Age:</th>
+      <th v-if="displayAge"></th>
+      <th v-else>{{age}}</th>
+      <br>
+      <th scope="row">Role In Genesys:</th>
+      <th v-if="displayRoleInGenesys"></th>
+      <th v-else>{{job_title}}</th>
+      <br>
+      <th scope="row">Skills:</th>
+      <th v-if="displaySkills"></th>
+      <th v-else>{{skills}}</th>
+      <br>
+      <th scope="row">Interests:</th>
+      <th v-if="displayInterests"></th>
+      <th v-else>{{interests}}</th>
+      <br>
+      <th scope="row">Personal Mail Id:</th>
+      <th v-if="displayPersonalEmail"></th>
+      <th v-else>{{personalMail}}</th>
+      <br>
+      <th scope="row">Contact:</th>
+      <th v-if="displayContact"></th>
+      <th v-else>{{contact}}</th>
+      <br>
+      
     </article>
   </div>  
-
+ 
   <button type="button" @click='getUserById()' class="btn btn-danger">show</button>&nbsp;
   <router-link to="EditProfile" tag="button" class="btn btn-danger">EditProfile</router-link>
 
@@ -48,6 +70,11 @@ import {getUserById } from '../services/UserService'
 
 export default {
  name: 'app',
+ mounted() {
+      console.log("mounted",this.$email);
+      this.first = this.$first;
+      this.emailLogin = this.$email;
+    },
   data() {
     return {
       firstName: this.firstName,
@@ -60,7 +87,16 @@ export default {
       interests:'',
       personalMail:'',
       contact:'',
-      job_title:''
+      job_title:'',
+      first: this.$first,
+      emailLogin: this.$email,
+      displayRole:true,
+      displayAge:true,
+      displayRoleInGenesys:true,
+      displaySkills:true,
+      displayInterests:true,
+      displayPersonalEmail:true,
+      displayContact:true
     }
   }, 
  methods: {
@@ -72,20 +108,27 @@ export default {
           this.$router.push({name: 'Leaderborad'})
       },
     getUserById() {
-      getUserById("mano").then(response => {
+      getUserById(this.first).then(response => {
         console.log("profilecheck",response);
-        this.firstName=response.firstname;
-        this.lastName=this.$lastname;
-        this.email=this.$email;
-        this.role=this.$role;
-        this.age=this.$age;
-        this.skills=this.$skills;
-        this.interests=this.$interests;
-        this.personalMail=this.$personalmail;
-        this.contact=this.$contact;
-        this.job_title=this.$job_title; 
-        return (this.firstname);
-
+        this.firstName=response[0].firstname;
+        this.lastName=response[0].lastname;
+        this.email=response[0].email;
+        this.role=response[0].role;
+        this.age=response[0].age;
+        this.skills=response[0].skills;
+        this.interests=response[0].interests;
+        this.personalMail=response[0].personalmail;
+        this.contact=response[0].contact;
+        this.job_title=response[0].job_title; 
+        //return (this.firstname);
+        this.displayRole = false
+        this.displayAge = false
+        this.displayRoleInGenesys = false
+        this.displaySkills = false
+        this.displayInterests = false
+        this.displayPersonalEmail = false
+        this.displayContact = false
+        console.log("sdsdddsf",this.role)
       })
     }
   },

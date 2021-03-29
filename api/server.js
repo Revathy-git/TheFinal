@@ -27,7 +27,7 @@ app.get('/users', db.getUsers)
 app.get('/api/users/:info', db.getUserById)
 app.post('/api/users', db.createUser)
 app.put('/users/:firstname', db.updateUser)
-app.post('/api/usersUpdate', db.updateProfileInfobyId)
+app.post('/api/usersUpdate/:firstname', db.updateProfileInfobyId)
 app.delete('/users/:firstname', db.deleteUser)
 
 app.listen(port, () => {

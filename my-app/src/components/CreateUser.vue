@@ -4,7 +4,7 @@
         <div class="col-md-7 mrgnbtm">
         <h2>Login</h2>
             <form>
-                <div class="row">
+                <!--<div class="row">
                     <div class="form-group col-md-6">
                         <label htmlFor="exampleInputEmail1">First Name</label>
                         <input type="text" class="form-control" v-model="firstName" name="firstname" id="firstname" aria-describedby="emailHelp" placeholder="First Name" />
@@ -13,11 +13,17 @@
                         <label htmlFor="exampleInputPassword1">Last Name</label>
                         <input type="text" class="form-control" v-model="lastName" name="lastname" id="lastname" placeholder="Last Name" />
                     </div>
-                </div>
+                </div>-->
                 <div class="row">
                     <div class="form-group col-md-12">
                         <label htmlFor="exampleInputEmail1">Email</label>
                         <input type="text" class="form-control" v-model="email" name="email" id="email" aria-describedby="emailHelp" placeholder="Email" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-12">
+                        <label htmlFor="exampleInputEmail1">Password</label>
+                        <input type="password" class="form-control" v-model="password" name="password" id="password" aria-describedby="emailHelp" placeholder="Password" />
                     </div>
                 </div>
                 <!-- <div class="row">
@@ -48,7 +54,8 @@ import Vue from "vue"
 export default {
   name: 'CreateUser',
   beforeDestroy() {
-      Vue.prototype.$first = this.firstName;
+      Vue.prototype.$first = this.email.split(".")[0];
+      Vue.prototype.$email = this.email;
       console.log("destry",this.$first);
     },
   data() {
@@ -56,13 +63,17 @@ export default {
       firstName: '',
       lastName: '',
       email: '',
-      role: ''
+      role: '',
+      user: {
+        email: '',
+        password: ''
+        }
     }
   },
   methods: {
       loginUser(){
           console.log(this.firstName)
-          this.$first = this.firstName
+          this.$first = this.email.split(".")[0]
           console.log(this.$first)
            /*const payload = {
               firstName: this.firstName,

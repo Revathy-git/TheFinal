@@ -28,8 +28,11 @@
                 <div class="container">
                   <h4><b>Revathy E</b></h4> 
                   <p>Software Engineer</p> 
-                  <label for="file">Goal Completion progress:</label>
-                  <progress id="file" value="32" max="100"> 32% </progress>
+                  <label for="file"><b>Goal Completion progress:</b></label>
+                  <progress id="file" value="32" max="100"> 32% </progress><br>
+                  <label><b>Your next appointment with Mentor: </b>Coming tomorrow at 11 am</label><br>
+                  <label><b>Total courses assigned: 5</b></label><br>
+                  <label><b>Total courses completed: 3</b></label><br>
                 </div>
               </div>
             </tr>
@@ -41,22 +44,25 @@
                   <h4><b>Manonmani S</b></h4> 
                   <p>Associate Software Engineer</p> 
                   <label for="file">Goal Completion progress:</label>
-                  <progress id="file" value="70" max="100"> 32% </progress>
+                  <progress id="file" value="70" max="100"> 32% </progress><br>
+                  <label><b>Your next appointment with Mentor: </b>Coming tomorrow at 11 am</label><br>
+                  <label><b>Total courses assigned: 7</b></label><br>
+                  <label><b>Total courses completed: 2</b></label><br>
                 </div>
               </div>
             </tr>
             <br><br>
-          <nav class="click-chat">
-            <ul>
-              <div>
-                <h1 class="chat">Connecting people !!</h1>
-                    <div class="text-center">
-                      <a class="btn btn-success me-2" href="https://teams.microsoft.com/l/chat/0/0?users=revathy.elankumaran@genesys.com&topicName=Prep%20For%20Meeting%20Tomorrow&message=Hi%20revathy" target="_blank" role="button">Connect with your MENTEE🙂<i class="fas fa-download"></i></a> 
-                    </div>
-              </div>
-            </ul>
+              <nav class="click-chat">
+                <ul>
+                  <div>
+                    <h1 class="chat">Connecting people !!</h1>
+                        <div class="text-center">
+                          <a class="btn btn-success me-2" href="https://teams.microsoft.com/l/chat/0/0?users=revathy.elankumaran@genesys.com&topicName=Prep%20For%20Meeting%20Tomorrow&message=Hi%20revathy" target="_blank" role="button">Connect with your MENTEE🙂<i class="fas fa-download"></i></a> 
+                        </div>
+                  </div>
+                </ul>
 
-          </nav>         
+          </nav>   
    </section>       
  </div>
 </template>
@@ -124,18 +130,20 @@ html {
    display: block;
    padding-bottom: 0.5em;
  }
-.chat{
-   text-align: middle;
-   font-size: 1.5rem;
-   color: #290320;
-}
-.click-chat{
-  float:left ;
-  width: 20%;
-  height: 100px; /* only for demonstration, should be removed */
-  background: #ccc;
-  padding: 20px;
-}
+
+  .chat{
+    text-align: middle;
+    font-size: 1.5rem;
+    color: #290320;
+  }
+  .click-chat{
+    float:left ;
+    width: 20%;
+    height: 100px; /* only for demonstration, should be removed */
+    background: #ccc;
+    padding: 20px;
+  }
+
  section::after {
   content: "";
   display: table;
@@ -173,7 +181,7 @@ article1 {
 .card {
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
   transition: 0.3s;
-  width: 400%;
+  width: 250%;
 }
 
 .card:hover {

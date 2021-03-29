@@ -36,14 +36,15 @@ const getUserById = (request, response) => {
 }
 const updateProfileInfobyId = (request, response) => {
     console.log("check");
-    console.log(request.body.data);
-    const {email, role,age ,skills,interests,personalMail,contact,job_title} = request.body.data
-    firstname="demo";
+    console.log(request.params);
+    const {role,age ,skills,interests,personalMail,contact,job_title} = request.body.data
+    //firstname="demo";
+    var firstname = request.params.firstname
     //const firstname = request.params.firstname
     console.log(firstname);
     //const id = randomId(5);
     //pool.query('INSERT INTO users (id, firstname, lastname, email, role, age,skills,interests,personalmail,contact,job_title) VALUES ($1, $2, $3, $4, $5,$6,$7,$8,$9,$10,$11)', [id, firstName, lastName, email,role,age,skills,interests,personalMail,contact,job_title], (error, results) => {
-    pool.query('UPDATE users SET email = $1 ,role=$2, age =$3,skills=$4,interests=$5,personalmail=$6,contact=$7,job_title=$8  WHERE firstname = $9',[email,role,age,skills,interests,personalMail,contact,job_title, firstname],(error, results) => {
+    pool.query('UPDATE users SET role=$1, age =$2,skills=$3,interests=$4,personalmail=$5,contact=$6,job_title=$7  WHERE firstname = $8',[role,age,skills,interests,personalMail,contact,job_title, firstname],(error, results) => {
             if (error) {
                 throw error
             }
