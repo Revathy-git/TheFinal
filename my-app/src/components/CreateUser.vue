@@ -64,12 +64,12 @@ export default {
           console.log(this.firstName)
           this.$first = this.firstName
           console.log(this.$first)
-           const payload = {
+           /*const payload = {
               firstName: this.firstName,
               lastName: this.lastName,
               email: this.email,
               role: this.role
-          }
+          }*/
           //this.$emit('createUser', payload)
           this.$router.push({name: 'HomeScreen'})
       },

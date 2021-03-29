@@ -21,10 +21,7 @@ export async function createUser(data) {
     return await response.json();
 }
 
-<<<<<<< HEAD
 
-=======
->>>>>>> b8858a0b2059949cda57d4ee4676988e35e8aa0b
 export async function updateProfileInfobyId(data) {
     console.log("inside service")
     const response = await fetch('/api/usersUpdate', {
@@ -33,12 +30,7 @@ export async function updateProfileInfobyId(data) {
         body: JSON.stringify({data})
     })
     return await response.json();
-<<<<<<< HEAD
- }
-
-=======
 }
->>>>>>> b8858a0b2059949cda57d4ee4676988e35e8aa0b
 export async function getCourses(firstName) {
     // const response = await fetch(`/api/users`, {
     //     method: 'POST',
@@ -70,8 +62,6 @@ export async function getQuestionsService(){
     return data
     //console.log("getQuestions method",firstName)
     //return ["q111","q222"]
-<<<<<<< HEAD
-=======
 
 }
 
@@ -86,5 +76,5 @@ export async function validateAnswer(question,answer){
     console.log("ddd",JSON.stringify({data}))
     return data
     //return {"code": "0", "score": 64.42}
->>>>>>> b8858a0b2059949cda57d4ee4676988e35e8aa0b
+
 }

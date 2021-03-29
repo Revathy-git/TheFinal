@@ -8,12 +8,12 @@ import Leaderborad from '@/views/Leaderboard.vue'
 import Profile from '@/views/Profile.vue'
 import EditProfile from '@/views/EditProfile.vue'
 import MenteeView from '@/views/MenteeView.vue'
-<<<<<<< HEAD
+
 import Mentorassign from '@/views/Mentorassign.vue'
 
-=======
+
 import MentorView from '@/views/MentorView.vue'
->>>>>>> b8858a0b2059949cda57d4ee4676988e35e8aa0b
+
 
 Vue.use(VueRouter)
 
