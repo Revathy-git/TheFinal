@@ -23,17 +23,15 @@ export async function createUser(data) {
     return await response.json();
 }
 
-<<<<<<< HEAD
-
 export async function updateProfileInfobyId(data) {
     console.log("inside service")
     const response = await fetch('/api/usersUpdate', {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({data})
-      })
+    })
     return await response.json();
-=======
+}
 export async function getCourses(firstName) {
     // const response = await fetch(`/api/users`, {
     //     method: 'POST',
@@ -67,5 +65,5 @@ export async function getQuestionsService(){
     return data
     //console.log("getQuestions method",firstName)
     //return ["q111","q222"]
->>>>>>> 3e845ed2a92c1fbff449d30778dabed857009f38
+
 }
