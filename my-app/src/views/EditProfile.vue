@@ -34,7 +34,7 @@
                     </div>
                     <div class="form-group col-md-4">
                         <label htmlFor="exampleRole">Role in Genesys</label>
-                        <input type="text" class="form-control" v-model="role" name="role" id="role" aria-describedby="emailHelp" placeholder="role" />
+                        <input type="text" class="form-control" v-model="job_title" name="job_title" id="job_title" aria-describedby="emailHelp" placeholder="job_title" />
                     </div>   
       </div>
 
@@ -59,23 +59,8 @@
                     </div>  
       </div>
 
-
-    <div class="row">
-            <div class="form-group col-md-12">
-                <input type="checkbox" id="Mentor" value="Mentor" v-model="role">
-                <label for="Mentor">Mentor</label>
-                &emsp;
-                <input type="checkbox" id="Mentee" value="Mentee" v-model="role">
-                <label for="Mentee">:    Mentee</label>
-                &emsp;
-                <input type="checkbox" id="Both" value="Both" v-model="role">
-                <label for="Both">Both</label>
-
-            </div>
-    </div>
-
   </div>  
-  <button type="button" @click='updateProfileInfo()' class="btn btn-danger">Save</button>&nbsp;
+  <button type="button" @click='updateProfileInfobyId()' class="btn btn-danger">Save</button>&nbsp;
   &nbsp;
   <router-link to="Profile" tag="button" class="btn btn-danger">Cancel</router-link>
 
@@ -85,22 +70,20 @@
 <script>
 import Burger from '@/components/Menu/Burger.vue';
 import Sidebar from '@/components/Menu/Sidebar.vue';
+import {updateProfileInfobyId} from '../services/UserService';
 
 export default {
  name: 'app',
    data() {
     return {
-      firstName: '',
-      lastName: '',
-      email: '',
-      age:'',
-      role: '',
-      skills:'',
-      interests:'',
-      personalMail:'',
-      contact:''
+
     }
-  }, 
+  },
+ components: {
+   Burger,
+   Sidebar
+
+ }, 
  methods: {
       clickHome() {
           console.log(this.$route.query.page)
@@ -109,28 +92,45 @@ export default {
       clickLeaderBoard() {
           this.$router.push({name: 'Leaderborad'})
       },
-      updateProfileInfo(){
+      updateProfileInfobyId(){
           const payload = {
               firstName: this.firstName,
               lastName: this.lastName,
               email: this.email,
-              age:'this.age',
-              role: 'this.role',
-              skills:'this.skills',
-              interests:'this.interests',
-              personalMail:'this.personalMail',
-              contact:'this.contact'
+              age:this.age,
+              skills:this.skills,
+              interests:this.interests,
+              personalMail:this.personalMail,
+              contact:this.contact,
+              job_title:this.job_title
           }
-          this.$emit('updateProfileInfo', payload)
-          this.$router.push({name: 'Profile'})
+          this.$emit('updateUser',payload)
+          this.clearForm();
+        
+                   updateProfileInfobyId(payload).then(response => {
+                   console.log(response);
+                   //this.getAllUsers();
+              });
+    
+      },
+      clearForm() {
+          this.firstName = "";
+          this.lastName = "";
+          this.email = "",
+          this.age= "",
+          this.skills= "",
+          this.interests= "",
+          this.personalMail= "",
+          this.contact= "",
+          this.job_title= "";
       }
-  },
-
- components: {
-   Burger,
-   Sidebar
- }
+      
+  }
 }
+
+
+
+
 </script>
 
 <style>

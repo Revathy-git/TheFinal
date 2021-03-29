@@ -15,40 +15,48 @@
      </ul>
    </Sidebar>
 
-  <div class="Personal Info">
-      <th scope="row">Name:&emsp;{{firstName}}{{lastName}}</th><br>
+  <div class="Personal Info" id="info">
+    <article>
+      <th scope="row">Name:&emsp;{{this.firstName}}{{lastName}}</th><br>
       <th scope="row">Email:{{email}}</th>&nbsp;<br>
-
+      <th scope="row">Role:{{role}}</th><br>
       <th scope="row">Age:{{age}}</th><br>
-      <th scope="row">Role In Genesys:{{role}}</th><br>
+      <th scope="row">Role In Genesys:{{job_title}}</th><br>
       <th scope="row">Skills:{{Skills}}</th><br>
       <th scope="row">Interests:{{interests}}</th><br>
       <th scope="row">Personal Mail Id:{{personalMail}}</th><br>
       <th scope="row">Contact:{{contact}}</th><br>
+    </article>
   </div>  
+  <button type="button" @click='getUserById()' class="btn btn-danger">show</button>&nbsp;
+
   <router-link to="EditProfile" tag="button" class="btn btn-danger">EditProfile</router-link>
 
  </div>
 </template>
-
 <script>
+
 import Burger from '@/components/Menu/Burger.vue';
 import Sidebar from '@/components/Menu/Sidebar.vue';
+import {getUserById } from '../services/UserService';
+
+
 
 export default {
  name: 'app',
   data() {
     return {
-      firstName: '',
-      lastName: '',
+      firstName: this.firstName,
+      lastName: this.lastName,
       email: '',
       //profilepic:'',
-      age:'',
       role: '',
+      age:'',
       skills:'',
       interests:'',
       personalMail:'',
-      contact:''
+      contact:'',
+      job_title:''
     }
   }, 
  methods: {
@@ -59,19 +67,16 @@ export default {
       clickLeaderBoard() {
           this.$router.push({name: 'Leaderborad'})
       },
-      getProfileInfo () {
-        console.log(this.firstName)
-        console.log(this.lastName)
-        console.log(this.email)
-        console.log(this.age)
-        console.log(this.role)
-        console.log(this.skills)
-        console.log(this.interests)
-        console.log(this.personalMail)
-        console.log(this.contact)
-      }
+    getUserById() {
+      getUserById().then(response => {
+        console.log("profilecheck");
+        console.log(response);
+        //return {response}
+ 
+      });
+    }
   },
-  
+    
  components: {
    Burger,
    Sidebar
@@ -117,4 +122,11 @@ html {
    display: block;
    padding-bottom: 0.5em;
  }
+ article {
+  float: center;
+  padding: 20px;
+  width: 70%;
+  background-color: #ffffff;
+  height: 500px; 
+}
 </style>
