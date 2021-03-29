@@ -22,6 +22,7 @@
     "moment": "^2.29.1",
     "moment-timezone": "^0.5.31",
     "morgan": "^1.10.0",
+    "node-fetch": "^2.6.1",
     "uuid": "^8.3.1",
     "windows-iana": "^4.2.1"
   }
