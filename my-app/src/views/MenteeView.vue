@@ -2,7 +2,7 @@
  <div id="app">
    <nav class="main-nav">
      <div class="logo">
-       Mentee Progress
+       Your View
      </div>
      <Burger></Burger>
    </nav>
@@ -12,56 +12,237 @@
        <button type="button" @click='clickHome()' class="btn btn-danger">Home</button><br><br>
        <a href="http://localhost:3000/calendar" tag="li" class="btn btn-danger">Calendar</a><br><br>
        <a href="http://172.24.135.111:8082/leaderboard.html" tag="li" class="btn btn-danger">LeaderBoard</a><br><br>
-       <button type="button" @click='clickMentorView()' class="btn btn-danger">Mentee View</button><br><br>
+       <button type="button" @click='clickMenteeView()' class="btn btn-danger">Mentee View</button><br><br>
        <button type="button" @click='clickProfile()' class="btn btn-danger">Profile</button><br><br>
           <a href="http://localhost:3000/mail" tag="li" class="btn btn-danger">Monthly Summary</a>
      </ul>
    </Sidebar>
-   
-   <section>
+
+   <div crossorigin="anonymous">
+        <section>
+          <article>
+            <div v-if="courseInProgress" crossorigin="anonymous">
+              <h1>Goals Assigned</h1>
+              <!--<h2>All Goals</h2>
+              <ul>
+                  <li v-for="task in tasklist" v-bind:key="task" v-text="task.description"></li>
+              </ul>-->
+              <h2>All goals</h2>
+              <ul>
+                  <li v-for="task in inCompletedlist" v-bind:key="task">{{ task.description }}  
+                  <!--<button @click="startProgress(task)" v-if="changebutton">StartProgress</button>
+                  <button class="changebutton" v-else>StartProgress</button>-->
+                  <button @click="toggle(task)">Mark as finished</button></li>
+              </ul>
+              <h2>All complete goals</h2>
+              <ul>
+                  <li v-for="task in Completedlist" v-bind:key="task">{{ task.description }}  <button @click="toggle(task)">Mark as unfinished</button></li>
+              </ul>
+              <button type="button" @click='getQuestions()'>Take Assessment</button>
+            </div>
+            <div v-else>
+              <h1>Final Review</h1>
+              <tr v-for="item in rowData" v-bind:key="item">
+                <th scope="row">{{ item.question }}</th>&nbsp;<br>
+                <!--<input type="text" class="form-control" v-model="item.answer" name="item.answer" id="answer" placeholder="Answer" />-->
+                <textarea align = "center" rows="4" cols="50" v-model="item.answer" name="item.answer" form="usrform"/>&nbsp;&nbsp;&nbsp;
+                <!--<button type="button" @click='validateAnswer(item)'>Validate</button>-->
+                
+              </tr>
+            
+              <button type="button" @click='submitAnswers()'>Submit</button>
+              <div v-if="validateAns">
+              </div>
+              <div v-else>
+                <p v-for="task in rowData1" v-bind:key="task">Correctness for question {{ task.number }} is {{ task.score }} </p>
+              </div>
+              
+              </div>
+          </article>
           
-            <!--<h1>Your Mentees</h1>-->
-            <br>
-            <tr>
-              <div class="card">
-                <!--<img src="img1.jpg" alt="Girl in a jacket" style="width:100%">-->
-                <div class="container">
-                  <h4><b>Revathy E</b></h4> 
-                  <p>Software Engineer</p> 
-                  <label for="file"><b>Goal Completion progress:</b></label>
-                  <progress id="file" value="32" max="100"> 32% </progress><br>
-                  <label><b>Your next appointment with Mentor: </b>Coming tomorrow at 11 am</label><br>
-                  <label><b>Total courses assigned: 5</b></label><br>
-                  <label><b>Total courses completed: 3</b></label><br>
+          <nav class="right-nav">
+            <ul>
+              <div>
+                <h1 class="righth1">Goal Progress</h1>
+                <p class="nocourse" v-if="courseCompleted">No goals assigned</p>
+                <div id="chart" v-else>
+                  <apexchart type="donut" :options="chartOptions" :series="series"></apexchart>
                 </div>
+                
               </div>
-            </tr>
-            <br>
-            <tr>
-              <div class="card">
-                <!--<img src="img1.jpg" alt="Avatar" style="width:100%">-->
-                <div class="container">
-                  <h4><b>Manonmani S</b></h4> 
-                  <p>Associate Software Engineer</p> 
-                  <label for="file">Goal Completion progress:</label>
-                  <progress id="file" value="70" max="100"> 32% </progress><br>
-                  <label><b>Your next appointment with Mentor: </b>Coming tomorrow at 11 am</label><br>
-                  <label><b>Total courses assigned: 7</b></label><br>
-                  <label><b>Total courses completed: 2</b></label><br>
-                </div>
-              </div>
-            </tr>
-         
-   </section>       
+              <button type="button" @click='getCourseCompletionList()' class="ref-course-btn">RefreshGoals</button><br><br>
+            </ul>
+          </nav>
+      </section>
+   </div>
  </div>
 </template>
 
-<script>
+<script crossorigin="anonymous">
 import Burger from '@/components/Menu/Burger.vue';
 import Sidebar from '@/components/Menu/Sidebar.vue';
+import ApexCharts from 'vue-apexcharts'
+import { getCourses,getQuestionsService,validateAnswer} from '../services/UserService'
+import axios from 'axios';
+axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
 
 export default {
- name: 'app',
+ name: 'app1',
+ beforeCreate(){
+   /*axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
+   axios.get(`http://fce-u0263.us.int.genesyslab.com:5070/qa?topic=android`,
+      {
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Credentials': 'true'
+      },
+      proxy: {
+        host: 'http://fce-u0263.us.int.genesyslab.com',
+        port: 5070
+      }
+      })
+    .then(response => {
+      //response.header("Access-Control-Allow-Origin", "*");
+      // JSON responses are automatically parsed.
+      //this.posts = response.data
+      console.log("created11",response.data)
+      for (var i = 0; i < response.length; i++) {
+          this.addQuestion(response.data[i])
+        }
+    })
+    .catch(e => {
+      this.errors.push(e)
+    })*/
+   this.tasklist = [{description: 'Go somewhere', completed:false},
+          {description: 'Go here', completed:false},
+          {description: 'Go there', completed:false},
+          {description: 'Go anywhere', completed:false},]
+ },
+ 
+ /*created(){
+   console.log("beforeCreate")
+   getCourses(this.first).then(response => {
+        console.log("getCourses",response)
+        this.courses = response
+        this.tasklist = []
+        for (var i = 0; i < this.courses.length; i++) {
+          console.log("getCourses---",this.courses[i])
+          this.tasklist[i] = {}
+          this.tasklist[i]["description"] = this.courses[i]
+          this.tasklist[i]["completed"] = true
+      }
+      
+      })
+   console.log("beforeCreate:::",this.courses)
+ },*/
+ mounted() {
+      console.log("mounted",this.$first);
+      this.first = this.$first;
+      //this.$emit('getCourses', this.first)
+      //this.tasklist = []
+      //this.getCourses();
+      //console.log("mounted:::",this.courses)
+      this.tasklist = [{description: 'Should complete basic android course', completed:false},
+          {description: 'Should develop an android weather app', completed:false},
+          {description: 'Run an generate apk file', completed:false},
+          {description: 'Give a demo on creating android app', completed:false},]
+      
+
+      //getting getQuestions
+      /*getQuestionsService().then(response => {
+        for (var i = 0; i < response.length; i++) {
+          this.addQuestion(response[i])
+        }
+      })*/
+
+      //this.addQuestion("q1")
+      //this.addQuestion("q2")
+      //this.addQuestion("q3")
+    },
+ data() {
+   return {
+      status: '',
+      first: this.$first,
+      courseCompleted: true,
+      courseInProgress: true,
+      tasklist:this.tasklist,
+      question:"",
+      answer:"",
+      changebutton: true,
+      score: true,
+      validateAns:true,
+      rowData:[],
+      rowData1:[],
+      series: [2, 3, 2],
+          chartOptions: {
+            chart: {
+              width: 380,
+              type: 'donut',
+              dropShadow: {
+                enabled: true,
+                color: '#111',
+                top: -1,
+                left: 3,
+                blur: 3,
+                opacity: 0.2
+              }
+            },
+            stroke: {
+              width: 0,
+            },
+            plotOptions: {
+              pie: {
+                donut: {
+                  labels: {
+                    show: true,
+                    total: {
+                      showAlways: true,
+                      show: true
+                    }
+                  }
+                }
+              }
+            },
+            labels: ["Done", "In Progress", "Not Started"],
+            dataLabels: {
+              dropShadow: {
+                blur: 3,
+                opacity: 0.8
+              }
+            },
+            fill: {
+            type: 'pattern',
+              opacity: 1,
+              pattern: {
+                enabled: true,
+                style: ['verticalLines', 'squares', 'horizontalLines', 'circles','slantedLines'],
+              },
+            },
+            states: {
+              hover: {
+                filter: 'none'
+              }
+            },
+            theme: {
+              palette: 'palette2'
+            },
+            title: {
+              text: ""
+            },
+            responsive: [{
+              breakpoint: 480,
+              options: {
+                chart: {
+                  width: 200
+                },
+                legend: {
+                  position: 'bottom'
+                }
+              }
+            }]
+          },
+   }
+ },
  methods: {
       clickHome() {
           console.log(this.$route.query.page)
@@ -70,13 +251,142 @@ export default {
       clickLeaderBoard() {
           this.$router.push({name: 'Leaderborad'})
       },
-      clickMentorView(){
-        this.$router.push({name: 'Mentor'})
+      getCourseCompletionList(){
+        this.courseCompleted=false
+        //TODO: api to get course completion
+      },
+      getQuestions(){
+        this.courseInProgress=false
+        console.log("getQuestions method")
+        //this.addQuestion("What's the role of Google Play in compatibility?")
+        //this.addQuestion("What is the Android Open Source Project?")
+        //this.addQuestion("How can I get access to Google apps for Android, such as Maps?")
+        getQuestionsService().then(response => {
+          console.log(response.samples)
+        for (var i = 0; i < response.samples.length; i++) {
+          console.log("dsdsd")
+          this.addQuestion(response.samples[i])
+        }
+        })
+        
+      },
+      getCourses(){
+        //this.$emit('getCourseDetails')
+        getCourses(this.first).then(response => {
+        console.log("getCourses",response)
+        this.courses = response
+        this.tasklist = []
+        for (var i = 0; i < this.courses.length; i++) {
+          console.log("getCourses---",this.courses[i])
+          this.tasklist[i] = {}
+          this.tasklist[i]["description"] = this.courses[i]
+          this.tasklist[i]["completed"] = false
+      }
+      console.log("getCourses---",this.tasklist)
+      })
+      },
+      clickMenteeView(){
+        this.$router.push({name: 'Mentee'})
+      },
+      toggle(task){
+        console.log("toggle---",this.tasklist)
+        task.completed = !task.completed;
+        this.tasklist.filter( task => ! task.completed );
+      },
+      startProgress(){
+        //task.completed = false;
+        this.changebutton = false
+      },
+      addQuestion(ques,ans){
+        var my_object = {
+          question:ques,
+          answer:ans
+        };
+        this.rowData.push(my_object)
+
+        this.question = '';
+        this.answer = '';
+        
+    },
+    submitAnswers(){
+      console.log("submitAnswers",this.rowData[0]["question"])
+      //TODO: save answers to db
+      var s1,s2=72.12,s3=55.54;
+      
+      
+      validateAnswer(this.rowData[0]["question"],this.rowData[0]["answer"]).then(response => {
+          console.log(response.score)
+          //item.score=response.score
+          console.log("item",response.score)
+          s1 = response.score
+          console.log("item11",s1)
+          this.rowData1.push({number:1,score:s1})
+        })
+        validateAnswer(this.rowData[1]["question"],this.rowData[1]["answer"]).then(response => {
+          console.log(response.score)
+          //item.score=response.score
+          console.log("item",response.score)
+          s2 = response.score
+          console.log("item11",s1)
+          this.rowData1.push({number:2,score:s2})
+        })
+        validateAnswer(this.rowData[2]["question"],this.rowData[2]["answer"]).then(response => {
+          console.log(response.score)
+          //item.score=response.score
+          console.log("item",response.score)
+          s3 = response.score
+          console.log("item11",s1)
+          this.rowData1.push({number:3,score:s3})
+        })
+        
+        console.log("item11111",s1)
+        
+        //this.rowData1.push({number:2,score:s2})
+        //this.rowData1.push({number:3,score:s3})
+      /*for (var j = 0; j < this.rowData.length; j++) {
+        console.log("item11",j)
+        validateAnswer(this.rowData[j]["question"],this.rowData[j]["answer"]).then(response => {
+          console.log(response.score)
+          //item.score=response.score
+          //console.log("item",item.score)
+          var my_object=[]
+          my_object = {
+            number:j,
+            score:response.score
+          };
+          console.log("item",j)
+          this.rowData1.push(my_object)
+          
+        })
+      }*/
+      
+      this.validateAns=false
+    },
+    validateAnswer(item){
+      console.log("question",item.question)
+      console.log("answer",item.answer)
+      validateAnswer(item.question,item.answer).then(response => {
+          console.log(response.score)
+          item.score=response.score
+          console.log("item",item.score)
+          this.validate=false
+          this.score=false
+        })
+    }
+  },
+  computed:{
+      inCompletedlist(){
+          console.log("inCompletedlist---",this.tasklist)
+          return this.tasklist.filter( task => ! task.completed );
+      },
+      Completedlist(){
+          return this.tasklist.filter( task => task.completed);
       }
   },
  components: {
    Burger,
-   Sidebar
+   Sidebar,
+   apexchart: ApexCharts
  }
 }
 </script>
@@ -99,7 +409,8 @@ html {
    align-self: center;
    color: #fff;
    font-weight: bold;
-   font-family: 'Lato'
+   font-family: 'Lato';
+   font-size: 2rem;
  }
 
  .main-nav {
@@ -140,10 +451,10 @@ nav ul {
   padding: 0;
 }
 
-article1 {
-  float: center;
+article {
+  float: left;
   padding: 20px;
-  width: 90%;
+  width: 70%;
   background-color: #f1f1f1;
   height: 700px; /* only for demonstration, should be removed */
 }
@@ -154,17 +465,41 @@ article1 {
   color: #4CAF50;
 }
 
-.card {
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-  transition: 0.3s;
-  width: 250%;
+.righth1{
+   text-align: middle;
+   font-size: 1.5rem;
+   color: #4CAF50;
 }
 
-.card:hover {
-  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+.nocourse{
+   text-align: center;
+   font-size: 1rem;
+   color: #ff3399;
+   top: 55%;
+   right: 14%
 }
 
-.container {
-  padding: 2px 16px;
+.ref-course-btn{
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 12px;
+  margin: 3px 2px;
+  cursor: pointer;
+  position: absolute;
+  top: 55%;
+  right: 11%
+}
+
+.changebutton{
+  color: white;
+}
+
+.textarea{
+
 }
 </style>
