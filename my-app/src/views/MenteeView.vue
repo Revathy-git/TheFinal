@@ -22,19 +22,19 @@
         <section>
           <article>
             <div v-if="courseInProgress" crossorigin="anonymous">
-              <h1>Goals Assigned</h1>
+              <h1 class="title">Goals Assigned</h1>
               <!--<h2>All Goals</h2>
               <ul>
                   <li v-for="task in tasklist" v-bind:key="task" v-text="task.description"></li>
               </ul>-->
-              <h2>All goals</h2>
+              <h2 class="subtitle">All goals</h2>
               <ul>
                   <li v-for="task in inCompletedlist" v-bind:key="task">{{ task.description }}  
                   <!--<button @click="startProgress(task)" v-if="changebutton">StartProgress</button>
                   <button class="changebutton" v-else>StartProgress</button>-->
                   <button @click="toggle(task)">Mark as finished</button></li>
               </ul>
-              <h2>All complete goals</h2>
+              <h2 class="subtitle">All complete goals</h2>
               <ul>
                   <li v-for="task in Completedlist" v-bind:key="task">{{ task.description }}  <button @click="toggle(task)">Mark as unfinished</button></li>
               </ul>
@@ -531,4 +531,19 @@ article {
 .textarea{
 
 }
+
+.title{
+  text-align: center;
+  font-size: 25px;
+  color: tomato;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.subtitle{
+  text-align: left;
+  font-size: 25px;
+  color: orange;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
 </style>
