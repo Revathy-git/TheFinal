@@ -17,14 +17,15 @@
     "express-session": "^1.17.1",
     "express-validator": "^6.6.1",
     "hbs": "^4.1.1",
+    "html-to-text": "^7.0.0",
     "http-errors": "^1.8.0",
     "isomorphic-fetch": "^3.0.0",
     "moment": "^2.29.1",
     "moment-timezone": "^0.5.31",
     "morgan": "^1.10.0",
     "node-fetch": "^2.6.1",
+    "simple-oauth2": "^1.5.0",
     "uuid": "^8.3.1",
-    "windows-iana": "^4.2.1",
-    "simple-oauth2": "^1.5.0"
+    "windows-iana": "^4.2.1"
   }
 }
