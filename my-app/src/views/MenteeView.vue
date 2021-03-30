@@ -1,9 +1,7 @@
 <template>
  <div id="app">
    <nav class="main-nav">
-     <div class="logo">
-       Your View
-     </div>
+     
      <Burger></Burger>
    </nav>
 
@@ -20,25 +18,25 @@
 
    <div crossorigin="anonymous">
         <section>
-          <article>
+          <div class = "article">
             <div v-if="courseInProgress" crossorigin="anonymous">
               <h1 class="title">Goals Assigned</h1>
               <!--<h2>All Goals</h2>
               <ul>
-                  <li v-for="task in tasklist" v-bind:key="task" v-text="task.description"></li>
+                  <div class="text1"><li class ="text1" v-for="task in tasklist" v-bind:key="task" v-text="task.description"></li></div>
               </ul>-->
               <h2 class="subtitle">All goals</h2>
               <ul>
-                  <li v-for="task in inCompletedlist" v-bind:key="task">{{ task.description }}  
+                  <li class="text1" v-for="task in inCompletedlist" v-bind:key="task">{{ task.description }}  
                   <!--<button @click="startProgress(task)" v-if="changebutton">StartProgress</button>
                   <button class="changebutton" v-else>StartProgress</button>-->
                   <button @click="toggle(task)">Mark as finished</button></li>
               </ul>
               <h2 class="subtitle">All complete goals</h2>
               <ul>
-                  <li v-for="task in Completedlist" v-bind:key="task">{{ task.description }}  <button @click="toggle(task)">Mark as unfinished</button></li>
+                  <li class="text1" v-for="task in Completedlist" v-bind:key="task">{{ task.description }}  <button @click="toggle(task)">Mark as unfinished</button></li>
               </ul>
-              <button type="button" @click='getQuestions()'>Take Assessment</button>
+              <button type="button" class="button1" @click='getQuestions()'>Take Assessment</button>
             </div>
             <div v-else>
               <h1>Final Review</h1>
@@ -58,9 +56,9 @@
               </div>
               
               </div>
-          </article>
+          </div>
           
-          <nav class="right-nav">
+          <nav class="right-nav1">
             <ul>
               <div>
                 <h1 class="righth1">Goal Progress</h1>
@@ -70,15 +68,15 @@
                 </div>
                 
               </div>
-              <button type="button" @click='getCourseCompletionList()' class="ref-course-btn">RefreshGoals</button><br><br>
+               <button type="button" @click='getCourseCompletionList()' class="ref-course-btn">RefreshGoals</button><br><br>
             </ul>
           </nav>
-          <nav class="click-chat">
+          <nav class="click-chat1">
             <ul>
               <div>
-                <h1 class="chat">Connecting people !!</h1>
-                    <div class="text-center">
-                      <a class="btn btn-success me-2" href="https://teams.microsoft.com/l/chat/0/0?users=maithili.jampana@genesys.com&topicName=Prep%20For%20Meeting%20Tomorrow&message=Hi%20maithili" target="_blank" role="button">Connect with your MENTOR🙂<i class="fas fa-download"></i></a>
+                <h1 class="chat">Chat with your mentor</h1>
+                    <div class="text-left">
+                      <a class="btn btn-success me-2" href="https://teams.microsoft.com/l/chat/0/0?users=maithili.jampana@genesys.com&topicName=Prep%20For%20Meeting%20Tomorrow&message=Hi%20maithili" target="_blank" role="button">Connect with one click<i class="fas fa-download"></i></a>
 
                     </div>
               </div>
@@ -448,16 +446,23 @@ html {
  }
 
 .chat{
-   text-align: middle;
+   text-align: left;
    font-size: 1.5rem;
    color: #290320;
 }
-.click-chat{
-  float:right ;
-  width: 50%;
+
+.text1{
+text-align: left;
+   font-size: 1.25rem;
+   color: white;
+}
+.click-chat1{
+  float:left ;
+  width: 20%;
   height: 200px; /* only for demonstration, should be removed */
-  background: #ccc;
-  padding: 20px;
+  top:10px;
+  left:-50px;
+ 
 }
 
  section::after {
@@ -466,11 +471,10 @@ html {
   clear: both;
 }
 
-.right-nav {
-  float: right;
+.right-nav1 {
+  float: left;
   width: 30%;
   height: 400px; /* only for demonstration, should be removed */
-  background: #ccc;
   padding: 20px;
 }
 
@@ -480,11 +484,11 @@ nav ul {
   padding: 0;
 }
 
-article {
+.article {
   float: left;
-  padding: 20px;
+  padding: 40px;
   width: 70%;
-  background-color: #f1f1f1;
+  left : -90px;
   height: 700px; /* only for demonstration, should be removed */
 }
 
@@ -495,9 +499,10 @@ article {
 }
 
 .righth1{
-   text-align: middle;
+   text-align: left;
    font-size: 1.5rem;
    color: #4CAF50;
+   left: 40px
 }
 
 .nocourse{
@@ -506,6 +511,20 @@ article {
    color: #ff3399;
    top: 55%;
    right: 14%
+}
+.button1{
+  left:0px;
+   background-color: #4CAF50;
+   display: inline-block;
+   border: none;
+   color: white;
+    text-align: center;
+     margin: 3px 2px;
+     cursor: pointer;
+  position: absolute;
+  right: -10px;
+  left:50px;
+   font-size: 16px;
 }
 
 .ref-course-btn{
@@ -516,12 +535,12 @@ article {
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 12px;
+  font-size: 16px;
   margin: 3px 2px;
   cursor: pointer;
   position: absolute;
-  top: 55%;
-  right: 11%
+  top: 53%;
+  right: 14%
 }
 
 .changebutton{
@@ -533,9 +552,11 @@ article {
 }
 
 .title{
-  text-align: center;
-  font-size: 25px;
-  color: tomato;
+  text-align: left;
+  font-size: 30px;
+  color: orange;
+  left : 10px;
+  
   font-family: Arial, Helvetica, sans-serif;
 }
 
