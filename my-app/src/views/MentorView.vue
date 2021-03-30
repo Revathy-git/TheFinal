@@ -10,11 +10,12 @@
    <Sidebar>
      <ul class="sidebar-panel-nav">
        <button type="button" @click='clickHome()' class="btn btn-danger">Home</button><br><br>
-       <a href="http://localhost:3000/calendar" tag="li" class="btn btn-danger">Calendar</a><br><br>
-       <a href="http://172.24.135.111:8082/leaderboard.html" tag="li" class="btn btn-danger">LeaderBoard</a><br><br>
-       <button type="button" @click='clickMentorView()' class="btn btn-danger">Mentee View</button><br><br>
-       <button type="button" @click='clickProfile()' class="btn btn-danger">Profile</button><br><br>
-          <a href="http://localhost:3000/mail" tag="li" class="btn btn-danger">Monthly Summary</a>
+              <a href="http://localhost:3000/calendar" tag="li" class="btn btn-danger">Calendar</a><br><br>
+              <a href="http://172.24.135.111:8082/leaderboard.html" tag="li" class="btn btn-danger">LeaderBoard</a><br><br>
+              <button type="button" @click='clickMenteeView()' class="btn btn-danger">Mentee View</button><br><br>
+              <button type="button" @click='clickMentorView()' class="btn btn-danger">Mentor View</button><br><br>
+              <button type="button" @click='clickProfile()' class="btn btn-danger">Profile</button><br><br>
+                 <a href="http://localhost:3000/mail" tag="li" class="btn btn-danger">Monthly Summary</a>
      </ul>
    </Sidebar>
    
@@ -83,6 +84,12 @@ export default {
       },
       clickMentorView(){
         this.$router.push({name: 'Mentor'})
+      },
+      clickMenteeView(){
+              this.$router.push({name: 'Mentee'})
+      },
+      clickProfile() {
+                this.$router.push({name: 'Profile'})
       }
   },
  components: {
