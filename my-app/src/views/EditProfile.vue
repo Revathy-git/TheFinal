@@ -4,11 +4,9 @@
      <div class="logo">
        EditProfile
      </div>
-     <Burger></Burger>
+
    </nav>
 
-   <Sidebar>
-   </Sidebar>
 
   <div class="Personal Info">
 
@@ -73,8 +71,8 @@
 </template>
 
 <script>
-import Burger from '@/components/Menu/Burger.vue';
-import Sidebar from '@/components/Menu/Sidebar.vue';
+
+
 import {updateProfileInfobyId, getMyMentor} from '../services/UserService';
 import 'vuejs-noty/dist/vuejs-noty.css'
 
@@ -99,8 +97,7 @@ export default {
     }
   },
  components: {
-   Burger,
-   Sidebar
+   
 
  }, 
  methods: {
@@ -199,15 +196,5 @@ html {
    padding: 0.5rem 0.8rem;
  }
 
- ul.sidebar-panel-nav {
-   list-style-type: none;
- }
 
- ul.sidebar-panel-nav > li > a {
-   color: #fff;
-   text-decoration: none;
-   font-size: 1.5rem;
-   display: block;
-   padding-bottom: 0.5em;
- }
 </style>
