@@ -1,5 +1,5 @@
 <template>
- <div id="app">
+ <div id="app" class="app-class">
    <nav class="main-nav">
      <div class="logo">
        Welcome {{first}}
@@ -20,8 +20,63 @@
      </ul>
    </Sidebar>
 
-   <div>
-        <section>
+   <div class="main-div">
+       <div class="left-div">
+         <form>
+              <div class="statustextbox">
+                <label htmlFor="exampleInputEmail1">Post your status</label>
+                <input type="text" class="form-control" v-model="req_sentence" name="req_sentence" id="req_sentence" aria-describedby="emailHelp" placeholder="how are you doing now" />
+                <button type="button" @click='showStatus()'>Give Suggestion</button>
+              </div>
+            </form>
+            <div v-if="res_data">
+              <textarea name="response_data" v-model="res_data" id="response_data" cols="60" rows="2"></textarea>              
+            </div>
+            <div v-if="show_res_data">
+              <button type="button" @click='showAnotherStatus()'>More Suggestion</button>
+              <button type="button" @click='postUpdate()'>Post Update</button>
+            </div>
+            <div v-if="postResponseStatus">
+              <p>Revathy</p>
+            </div>
+            <div v-if="postResponseStatus">
+              <img v-bind:src = "postImg" width="200" height="150">              
+            </div>
+            <div v-if="postResponseStatus">
+              <p>
+                {{ postText }}
+              </p>
+            </div>
+             <div v-if="postResponseStatus">
+              <p>Mythili</p>
+            </div>
+            <div v-if="postResponseStatus">
+              <img v-bind:src = "postImg2" width="200" height="150">              
+            </div>
+            <div v-if="postResponseStatus">
+              <p>
+                Successfully completed all tasks
+              </p>
+            </div>
+       </div>
+       <div class="right-div">
+         <nav class="right-nav">
+            <ul>
+              <div class="right-nav-1">
+                <h1 class="righth1">Goals Progress</h1>
+                <p class="nocourse" v-if="courseCompleted">No goals assigned</p>
+                <div id="chart" v-else>
+                  <apexchart type="donut" :options="chartOptions" :series="series"></apexchart>
+                </div>
+                
+              </div>
+              <button type="button" @click='getCourses()' class="ref-course-btn">RefreshGoals</button><br><br>
+            </ul>
+
+          </nav>
+       </div>
+     
+        <section v-show="hide">
           <article>
             <!--<h1 class="statush1">Post your status</h1>
             <p>I will feeling good today</p>-->
@@ -79,6 +134,8 @@
         
       </section>
    </div>
+ <div class = "footer">
+ </div>
  </div>
 </template>
 
@@ -96,7 +153,9 @@ export default {
  data() {
    return {
       status: '',
+      hide : false,
       postImg:'',
+      postImg2:'',
       postText:'',
       show_res_data:'',
       req_sentence: '',
@@ -244,6 +303,7 @@ export default {
         this.postResponseStatus = true; 
         this.postText = this.res_data
         this.postImg = require('../images/img_girl.jpg');
+        this.postImg2 = require('../images/img_girl2.jpg');
         this.res_data = '';
         this.show_res_data = false;
       }
@@ -267,7 +327,7 @@ html {
    font-family: 'Lato';
    height: 100%;
    background: rgb(101,31,87);
-   background: linear-gradient(45deg, rgba(101,31,87,1) 0%, rgba(225,113,87,1) 48%, rgba(249,248,113,1) 100%);
+   /*background: linear-gradient(45deg, rgba(101,31,87,1) 0%, rgba(225,113,87,1) 48%, rgba(249,248,113,1) 100%);*/
  }
 
  .logo {
@@ -276,6 +336,10 @@ html {
    font-weight: bold;
    font-family: 'Lato';
    font-size: 2rem;
+ }
+
+ .app-class{
+   height: 100%;
  }
 
  .main-nav {
@@ -295,53 +359,66 @@ html {
    display: block;
    padding-bottom: 0.5em;
  }
-
- section::after {
-  content: "";
-  display: table;
-  clear: both;
-}
-
-.right-nav {
-  float: right;
-  width: 30%;
-  height: 400px; /* only for demonstration, should be removed */
-  background: #ccc;
-  padding: 20px;
-}
-
-/* Style the list inside the menu */
-nav ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-article {
+.left-nav {
   float: left;
-  padding: 20px;
   width: 70%;
-  background-color: #f1f1f1;
-  height: 200px; /* only for demonstration, should be removed */
+  height: 500px; 
+  /* background: #ccc; */
+  padding: 20px;
+}
+.left-div {
+  float:left;
+  /* background: rgb(235, 224, 224); */
+  background:white;
+  width: 60%;
+  height:1000px;
+  border-width: 1cm;
+  border-block-start-color: steelblue;
+  padding-right: 2cm;
+}
+
+.right-div {
+  float:right;
+  background: #ccc;
+  /* background: rgb(245, 205, 205); */
+  width: 40%;
+  height:1000px;
+  border-width: 1cm;
+  border-block-start-color: steelblue;
+}
+
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background:  rgb(101,31,87);
+  color: white;
+  text-align: center;
 }
 
 .statush1{
   text-align: left;
-  //text-transform: uppercase;
+  /*text-transform: uppercase;*/
   color: #4CAF50;
 }
 
 .righth1{
-   text-align: middle;
+   text-align: left;
    font-size: 1.5rem;
    color: #4CAF50;
 }
 
-.nocourse{
-   text-align: center;
-   font-size: 1rem;
-   color: #ff3399;
-   top: 55%;
-   right: 14%
+.right-nav-1 {
+  border: none;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  margin: 3px 2px;
+  cursor: pointer;
+  position: absolute;
+  right: 10%
 }
 
 .ref-course-btn{
@@ -357,6 +434,6 @@ article {
   cursor: pointer;
   position: absolute;
   top: 55%;
-  right: 11%
+  right: 20%
 }
 </style>
