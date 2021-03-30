@@ -30,17 +30,37 @@
                 <label htmlFor="exampleInputEmail1">Post your status</label>
                 <input type="text" class="form-control" v-model="req_sentence" name="req_sentence" id="req_sentence" aria-describedby="emailHelp" placeholder="how are you doing now" />
                 <button type="button" @click='showStatus()'>Give Suggestion</button>
-                <button type="button" @click='postUpdate()'>Post Update</button>
               </div>
             </form>
             <div v-if="res_data">
-              <p>
-                {{ res_data }}
-                <button type="button" @click='showAnotherStatus()'>More Suggestion</button>
-              </p>
-
+              <textarea name="response_data" v-model="res_data" id="response_data" cols="60" rows="2"></textarea>              
             </div>
-            
+            <div v-if="show_res_data">
+              <button type="button" @click='showAnotherStatus()'>More Suggestion</button>
+              <button type="button" @click='postUpdate()'>Post Update</button>
+            </div>
+            <div v-if="postResponseStatus">
+              <p>Revathy</p>
+            </div>
+            <div v-if="postResponseStatus">
+              <img v-bind:src = "postImg" width="200" height="150">              
+            </div>
+            <div v-if="postResponseStatus">
+              <p>
+                {{ postText }}
+              </p>
+            </div>
+             <div v-if="postResponseStatus">
+              <p>Mythili</p>
+            </div>
+            <div v-if="postResponseStatus">
+              <img v-bind:src = "postImg" width="200" height="150">              
+            </div>
+            <div v-if="postResponseStatus">
+              <p>
+                Some Text
+              </p>
+            </div>
           </article>
           <nav class="right-nav">
             <ul>
@@ -76,9 +96,14 @@ export default {
  data() {
    return {
       status: '',
+      postImg:'',
+      postText:'',
+      show_res_data:'',
       req_sentence: '',
       response_text: '',
       res_data: '',
+      postResponseStatus: false,
+      previewImage:null,
       first: this.$first,
       courseCompleted: true,
       series: [2, 3, 2],
@@ -194,6 +219,7 @@ export default {
         console.log(res); 
         const data = await res.json();
         this.res_data = data.message[0];
+        this.show_res_data = true;
       },
       async showAnotherStatus(){
         var myHeaders = new Headers();
@@ -212,6 +238,14 @@ export default {
         console.log(res); 
         const data = await res.json();
         this.res_data = data.message[1];
+        this.show_res_data = true;
+      },
+      postUpdate(){
+        this.postResponseStatus = true; 
+        this.postText = this.res_data
+        this.postImg = require('../images/img_girl.jpg');
+        this.res_data = '';
+        this.show_res_data = false;
       }
   },
  components: {
