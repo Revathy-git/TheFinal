@@ -89,7 +89,7 @@ router.get('/',
                 req.flash('error_msg', 'Could not get an access token');
             }
 
-            var response = await fetch("http://fce-u0263.us.int.genesyslab.com:5080/verify_calendar?email=Revathy.Elankumaran@genesys.com");
+            var response = await fetch("http://fce-u0263.us.int.genesyslab.com:5080/verify_calendar?email=Revathy.Shree@outlook.com");
             if (response.ok) { // if HTTP-status is 200-299
                                // get the response body (the method explained below)
                 let json = await response.json();
