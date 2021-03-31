@@ -82,7 +82,7 @@ export default {
               role: this.role
           }*/
           //this.$emit('createUser', payload)
-          this.$router.push({name: 'HomeScreen'})
+          this.$router.push({name: 'Profile'})
       },
       createUser() {
           console.log(this.firstName)

@@ -390,11 +390,11 @@ html {
 }
 .left-div {
   float:left;
-  /* background: rgb(235, 224, 224); */
-  background:white;
+  background: rgb(235, 220, 224); 
+  //background:#310;
   width: 100%;
   height:1000px;
-  border-width: 1cm;
+  border-width: 0.5cm;
   border-block-start-color: steelblue;
   padding-right: 2cm;
 }

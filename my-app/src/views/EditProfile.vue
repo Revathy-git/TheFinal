@@ -129,7 +129,9 @@ export default {
               });
           this.$notify({
                 group: 'foo',
-                title: 'Data saved'
+              type:'success',
+                duration:7000,                
+                title: 'Data saved',
               });
       },
       clearForm() {
@@ -148,10 +150,13 @@ export default {
         const payload = {
               interests: this.interests
           }
+
         getMyMentor(payload).then(response => {
           console.log(response.name)
           this.$notify({
           group: 'foo',
+          type:'success',
+          duration:7000,
           title: 'Mentor Assigned',
           text: response.name
         });
@@ -168,7 +173,7 @@ export default {
 
 
 </script>
-
+   <notifications group="foo" position="top center"/>
 <style>
 html {
    height: 100%;
@@ -189,7 +194,46 @@ html {
    font-weight: bold;
    font-family: 'Lato'
  }
+.vue-notification {
+ 
+    font-size: 30px;
+    padding: 20px 30px;
+    margin:  0px 30px;
+    color: #fff;
+    background: #44a4fc;
+    border-right: 5px solid #187fe7;
+    border-bottom-style: ridge;
+    position: auto;
+    width: 700px;
+    top: 0px;
+    right: 0px;
+}
 
+.vue-notification-group {
+    display: block;
+    position: auto;
+    z-index: 5000;
+    width: 500px;
+    left:20px;
+
+
+}
+.notification-title {
+    font-weight: 200;
+    position:auto;
+}
+.vue-notification-wrapper {
+    position: auto;
+    display: block;
+    overflow: relative;
+    width: 20px;
+    margin: 0;
+    padding: 0;
+    width: 600px;
+    top: 20px;
+    right: 20px;
+    left:0px;
+}
  .main-nav {
    display: flex;
    justify-content: space-between;
