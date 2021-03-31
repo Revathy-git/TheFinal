@@ -1,18 +1,20 @@
 <template>
  <div id="app">
    <nav class="main-nav">
-     
+     <div class="logoMentee">
+       My View
+     </div>
      <Burger></Burger>
    </nav>
 
    <Sidebar>
      <ul class="sidebar-panel-nav">
        <button type="button" @click='clickHome()' class="btn btn-danger">Home</button><br><br>
-              <a href="http://localhost:3000/calendar" tag="li" class="btn btn-danger">Calendar</a><br><br>
-              <a href="http://172.24.135.111:8082/leaderboard.html" tag="li" class="btn btn-danger">LeaderBoard</a><br><br>
-              <button type="button" @click='clickMenteeView()' class="btn btn-danger">Mentee View</button><br><br>
-              <button type="button" @click='clickProfile()' class="btn btn-danger">Profile</button><br><br>
-                 <a href="http://localhost:3000/mail" tag="li" class="btn btn-danger">Monthly Summary</a>
+       <a href="http://localhost:3000/calendar" tag="li" class="btn btn-danger">Calendar</a><br><br>
+       <a href="http://172.24.135.111:8082/leaderboard.html" tag="li" class="btn btn-danger">LeaderBoard</a><br><br>
+       <button type="button" @click='clickMenteeView()' class="btn btn-danger">Mentee View</button><br><br>
+       <button type="button" @click='clickProfile()' class="btn btn-danger">Profile</button><br><br>
+          <a href="http://localhost:3000/mail" tag="li" class="btn btn-danger">Monthly Summary</a>
      </ul>
    </Sidebar>
 
@@ -20,39 +22,56 @@
         <section>
           <div class = "article">
             <div v-if="courseInProgress" crossorigin="anonymous">
-              <h1 class="title">Goals Assigned</h1>
+              <h1 class="title">Goals Assigned</h1><br>
               <!--<h2>All Goals</h2>
               <ul>
                   <div class="text1"><li class ="text1" v-for="task in tasklist" v-bind:key="task" v-text="task.description"></li></div>
               </ul>-->
               <h2 class="subtitle">All goals</h2>
-              <ul>
-                  <li class="text1" v-for="task in inCompletedlist" v-bind:key="task">{{ task.description }}  
+              <!--<ul>
+                  <li class="text1" v-for="task in inCompletedlist" v-bind:key="task">{{ task.description }}   -->
                   <!--<button @click="startProgress(task)" v-if="changebutton">StartProgress</button>
                   <button class="changebutton" v-else>StartProgress</button>-->
-                  <button @click="toggle(task)">Mark as finished</button></li>
-              </ul>
+                 <!-- <button class="markFinished" @click="toggle(task)">Mark as finished</button></li>
+              </ul>-->
+              <table>
+                <tr v-for="task in inCompletedlist" v-bind:key="task">
+                    <td><b>{{ task.description }}</b></td>
+                    <td><button class="markFinished" @click="toggle(task)">Mark as finished</button></td>
+                </tr>
+              </table>
               <h2 class="subtitle">All complete goals</h2>
-              <ul>
-                  <li class="text1" v-for="task in Completedlist" v-bind:key="task">{{ task.description }}  <button @click="toggle(task)">Mark as unfinished</button></li>
-              </ul>
+              <!--<ul>
+                  <li class="text1" v-for="task in Completedlist" v-bind:key="task">{{ task.description }}  
+                  <button class="markUnFinished" @click="toggle(task)">Mark as unfinished</button></li>
+              </ul>-->
+              <table>
+                <tr v-for="task in Completedlist" v-bind:key="task">
+                    <td><b>{{ task.description }}</b></td>
+                    <td><button class="markUnFinished" @click="toggle(task)">Mark as unfinished</button></td>
+                </tr>
+              </table>
+              <br><br><br><br><br><br><br><br>
               <button type="button" class="button1" @click='getQuestions()'>Take Assessment</button>
             </div>
             <div v-else>
-              <h1>Final Review</h1>
+              <h1 class="title">Final Review</h1>
               <tr v-for="item in rowData" v-bind:key="item">
-                <th scope="row">{{ item.question }}</th>&nbsp;<br>
+                <th class="question" scope="row">{{ item.question }}</th>&nbsp;<br>
                 <!--<input type="text" class="form-control" v-model="item.answer" name="item.answer" id="answer" placeholder="Answer" />-->
-                <textarea align = "center" rows="4" cols="50" v-model="item.answer" name="item.answer" form="usrform"/>&nbsp;&nbsp;&nbsp;
+                <td>
+                <textarea class="answerBox" align = "left" rows="2" cols="50" v-model="item.answer" name="item.answer" form="usrform"/>&nbsp;&nbsp;&nbsp;
+                </td>
                 <!--<button type="button" @click='validateAnswer(item)'>Validate</button>-->
                 
               </tr>
-            
-              <button type="button" @click='submitAnswers()'>Submit</button>
+              <br><br> 
+              <button class="submitButton" type="button" @click='submitAnswers()'>Submit</button>
+              <br><br>
               <div v-if="validateAns">
               </div>
               <div v-else>
-                <p v-for="task in rowData1" v-bind:key="task">Correctness for question {{ task.number }} is {{ task.score }} </p>
+                <p class="correctness" v-for="task in rowData1" v-bind:key="task">Correctness for question {{ task.number }} is <b>{{ task.score }}</b> </p>
               </div>
               
               </div>
@@ -62,21 +81,25 @@
             <ul>
               <div>
                 <h1 class="righth1">Goal Progress</h1>
+                <button type="button" @click='getCourseCompletionList()' class="ref-course-btn">RefreshGoals</button>
                 <p class="nocourse" v-if="courseCompleted">No goals assigned</p>
-                <div id="chart" v-else>
+                <div id="chart" class="viewChart" v-else>
                   <apexchart type="donut" :options="chartOptions" :series="series"></apexchart>
                 </div>
                 
               </div>
-               <button type="button" @click='getCourseCompletionList()' class="ref-course-btn">RefreshGoals</button><br><br>
+              <button type="button" @click='getCourseCompletionList()' class="ref-course-btn">RefreshGoals</button><br><br>
             </ul>
           </nav>
+          
           <nav class="click-chat1">
             <ul>
               <div>
-                <h1 class="chat">Chat with your mentor</h1>
+                <br><br><br><br><br><br><br><br><br>
+                <!--<h1 class="chat">Chat with your mentor</h1>-->
                     <div class="text-left">
-                      <a class="btn btn-success me-2" href="https://teams.microsoft.com/l/chat/0/0?users=maithili.jampana@genesys.com&topicName=Prep%20For%20Meeting%20Tomorrow&message=Hi%20maithili" target="_blank" role="button">Connect with one click<i class="fas fa-download"></i></a>
+                      <a class="btn btn-success me-2" href="https://teams.microsoft.com/l/chat/0/0?users=maithili.jampana@genesys.com&topicName=Prep%20For%20Meeting%20Tomorrow&message=Hi%20maithili" target="_blank" role="button">Connect with Mentor
+                      <i class="fas fa-download"></i></a>
 
                     </div>
               </div>
@@ -183,7 +206,7 @@ export default {
       validateAns:true,
       rowData:[],
       rowData1:[],
-      series: [2, 3, 2],
+      series: [1, 1, 2],
           chartOptions: {
             chart: {
               width: 380,
@@ -261,10 +284,6 @@ export default {
       clickLeaderBoard() {
           this.$router.push({name: 'Leaderborad'})
       },
-
-      clickProfile() {
-           this.$router.push({name: 'Profile'})
-      },
       getCourseCompletionList(){
         this.courseCompleted=false
         //TODO: api to get course completion
@@ -301,6 +320,12 @@ export default {
       },
       clickMenteeView(){
         this.$router.push({name: 'Mentee'})
+      },
+      clickProfile() {
+          this.$router.push({name: 'Profile'})
+      },
+      clickMentorView(){
+          this.$router.push({name: 'Mentor'})
       },
       toggle(task){
         console.log("toggle---",this.tasklist)
@@ -419,11 +444,11 @@ html {
    background: linear-gradient(45deg, rgba(101,31,87,1) 0%, rgba(225,113,87,1) 48%, rgba(249,248,113,1) 100%);
  }
 
- .logo {
+ .logoMentee {
    align-self: center;
-   color: #fff;
+   color: #a3c2c2;
    font-weight: bold;
-   font-family: 'Lato';
+   font-family: Courier New, sans-serif;
    font-size: 2rem;
  }
 
@@ -450,21 +475,26 @@ html {
    font-size: 1.5rem;
    color: #290320;
 }
-
+.click-chat{
+  float:right ;
+  width: 50%;
+  height: 200px; /* only for demonstration, should be removed */
+  background: #ccc;
+  padding: 20px;
+}
 .text1{
 text-align: left;
    font-size: 1.25rem;
    color: white;
 }
 .click-chat1{
-  float:left ;
+  float:right ;
   width: 20%;
   height: 200px; /* only for demonstration, should be removed */
   top:10px;
-  left:-50px;
+  
  
 }
-
  section::after {
   content: "";
   display: table;
@@ -475,6 +505,7 @@ text-align: left;
   float: left;
   width: 30%;
   height: 400px; /* only for demonstration, should be removed */
+  
   padding: 20px;
 }
 
@@ -489,7 +520,7 @@ nav ul {
   padding: 40px;
   width: 70%;
   left : -90px;
-  height: 700px; /* only for demonstration, should be removed */
+  height: 600px; /* only for demonstration, should be removed */
 }
 
 .statush1{
@@ -502,16 +533,25 @@ nav ul {
    text-align: left;
    font-size: 1.5rem;
    color: #4CAF50;
-   left: 40px
+   left: 60px;
+   font-weight: bold;
+   position: absolute;
+   top: 60px; 
+   left: 1000px;
 }
 
 .nocourse{
-   text-align: center;
+   text-align: left;
    font-size: 1rem;
    color: #ff3399;
    top: 55%;
-   right: 14%
+   right: 14%;
+   font-weight: bold;
+   position: absolute;
+   top: 120px; 
+   left: 1000px;
 }
+
 .button1{
   left:0px;
    background-color: #4CAF50;
@@ -540,7 +580,7 @@ nav ul {
   cursor: pointer;
   position: absolute;
   top: 53%;
-  right: 14%
+  right: 25%
 }
 
 .changebutton{
@@ -554,17 +594,89 @@ nav ul {
 .title{
   text-align: left;
   font-size: 30px;
-  color: orange;
+  color: #ffcc00;
   left : 10px;
-  
   font-family: Arial, Helvetica, sans-serif;
 }
 
 .subtitle{
   text-align: left;
-  font-size: 25px;
+  font-size: 24px;
   color: orange;
   font-family: Arial, Helvetica, sans-serif;
+}
+
+.markFinished{
+  background-color: orange;
+  border: none;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 3px 2px;
+  cursor: pointer;
+  top: 53%;
+  right: 14%
+}
+
+.markUnFinished{
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 3px 2px;
+  cursor: pointer;
+  top: 53%;
+  right: 14%
+}
+
+.viewChart{
+  right:40%
+}
+
+.text-left{
+  align: right;
+}
+
+.question{
+ font-size: 16px; 
+}
+
+.submitButton{
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  margin: 3px 2px;
+  cursor: pointer;
+  top: 53%;
+  right: 22%
+}
+
+.correctness{
+  text-align: left;
+  color: #75a3a3;
+  font-size: 18px;
+}
+
+.answerBox{
+  width: 400px;
+	height: 70px;
+	border: 3px solid #cccccc;
+	padding: 5px;
+	font-family: Tahoma, sans-serif;
+	background-position: bottom right;
+	background-repeat: no-repeat;
+  background-color: #333333;
+  background: #e6e6e6
 }
 
 </style>
