@@ -23,14 +23,18 @@
    <div class="main-div">
        <div class="left-div">
          <form>
-              <div class="statustextbox">
-                <label htmlFor="exampleInputEmail1">Post your status</label>
-                <input type="text" class="form-control" v-model="req_sentence" name="req_sentence" id="req_sentence" aria-describedby="emailHelp" placeholder="how are you doing now" />
-                <button type="button" @click='showStatus()'>Give Suggestion</button>
-              </div>
-            </form>
+            <div class="statustextbox">
+              <label htmlFor="exampleInputEmail1">Post your status</label>
+              <input type="text" class="form-control" v-model="req_sentence" name="req_sentence" id="req_sentence" aria-describedby="emailHelp" placeholder="how are you doing now" />
+              <button type="button" @click='showStatus()'>Give Suggestion</button>
+            </div>
+          </form>
+            <div v-if="show_image_preview" >
+              <img v-bind:src = "previewImage" class="uploading-image" />
+              <input type="file" accept="image/jpeg" @change=uploadImage>
+            </div> 
             <div v-if="res_data">
-              <textarea name="response_data" v-model="res_data" id="response_data" cols="60" rows="2"></textarea>              
+              <textarea name = "response_data" v-model="res_data" id="response_data" cols="60" rows="2"></textarea>              
             </div>
             <div v-if="show_res_data">
               <button type="button" @click='showAnotherStatus()'>More Suggestion</button>
@@ -163,6 +167,7 @@ export default {
       res_data: '',
       postResponseStatus: false,
       previewImage:null,
+      show_image_preview:true,
       first: this.$first,
       courseCompleted: true,
       series: [2, 3, 2],
@@ -306,6 +311,16 @@ export default {
         this.postImg2 = require('../images/img_girl2.jpg');
         this.res_data = '';
         this.show_res_data = false;
+        this.show_image_preview = false;
+      },
+      uploadImage(e){
+        const image = e.target.files[0];
+        const reader = new FileReader();
+        reader.readAsDataURL(image);
+        reader.onload = e =>{
+            this.previewImage = e.target.result;
+            console.log(this.previewImage);
+        };
       }
   },
  components: {
@@ -436,4 +451,9 @@ html {
   top: 55%;
   right: 20%
 }
+/* .uploading-image{
+  width: 200px;
+  height: 150px;
+} */
+
 </style>
