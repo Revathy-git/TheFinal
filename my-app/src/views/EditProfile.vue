@@ -129,7 +129,7 @@ export default {
               });
           this.$notify({
                 group: 'foo',
-              type:'success',
+               type:'info',
                 duration:7000,                
                 title: 'Data saved',
               });
@@ -155,7 +155,7 @@ export default {
           console.log(response.name)
           this.$notify({
           group: 'foo',
-          type:'success',
+          type:'info',
           duration:7000,
           title: 'Mentor Assigned',
           text: response.name
