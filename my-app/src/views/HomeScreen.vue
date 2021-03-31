@@ -25,14 +25,15 @@
          <form>
             <div class="statustextbox">
               <label htmlFor="exampleInputEmail1">Post your status</label>
+              <div v-if="show_image_preview" >
+                <img v-bind:src = "previewImage" class="uploading-image" />
+                <input type="file" accept="image/jpeg" @change=uploadImage>
+              </div>  
               <input type="text" class="form-control" v-model="req_sentence" name="req_sentence" id="req_sentence" aria-describedby="emailHelp" placeholder="how are you doing now" />
               <button type="button" @click='showStatus()'>Give Suggestion</button>
             </div>
           </form>
-            <div v-if="show_image_preview" >
-              <img v-bind:src = "previewImage" class="uploading-image" />
-              <input type="file" accept="image/jpeg" @change=uploadImage>
-            </div> 
+            
             <div v-if="res_data">
               <textarea name = "response_data" v-model="res_data" id="response_data" cols="60" rows="2"></textarea>              
             </div>
@@ -63,24 +64,7 @@
               </p>
             </div>
        </div>
-       <div class="right-div">
-         <nav class="right-nav">
-            <ul>
-              <div class="right-nav-1">
-                <h1 class="righth1">Goals Progress</h1>
-                <p class="nocourse" v-if="courseCompleted">No goals assigned</p>
-                <div id="chart" v-else>
-                  <apexchart type="donut" :options="chartOptions" :series="series"></apexchart>
-                </div>
-                
-              </div>
-              <button type="button" @click='getCourses()' class="ref-course-btn">RefreshGoals</button><br><br>
-            </ul>
-
-          </nav>
-       </div>
-     
-        <section v-show="hide">
+       <section v-show="hide">
           <article>
             <!--<h1 class="statush1">Post your status</h1>
             <p>I will feeling good today</p>-->
@@ -129,13 +113,10 @@
                 <div id="chart" v-else>
                   <apexchart type="donut" :options="chartOptions" :series="series"></apexchart>
                 </div>
-                
               </div>
               <button type="button" @click='getCourses()' class="ref-course-btn">RefreshGoals</button><br><br>
             </ul>
-
           </nav>
-        
       </section>
    </div>
  <div class = "footer">
@@ -385,7 +366,7 @@ html {
   float:left;
   /* background: rgb(235, 224, 224); */
   background:white;
-  width: 60%;
+  width: 100%;
   height:1000px;
   border-width: 1cm;
   border-block-start-color: steelblue;
