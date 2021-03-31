@@ -348,6 +348,8 @@ export default {
         
     },
     submitAnswers(){
+      this.validateAns = true
+      this.rowData1 = []
       console.log("submitAnswers",this.rowData[0]["question"])
       //TODO: save answers to db
       var s1,s2=72.12,s3=55.54;
