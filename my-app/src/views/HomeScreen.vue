@@ -16,7 +16,6 @@
        <button type="button" @click='clickMentorView()' class="btn btn-danger">Mentor View</button><br><br>
        <button type="button" @click='clickProfile()' class="btn btn-danger">Profile</button><br><br>
           <a href="http://localhost:3000/mail" tag="li" class="btn btn-danger">Monthly Summary</a>
-
      </ul>
    </Sidebar>
 
@@ -33,7 +32,6 @@
               <button type="button" @click='showStatus()'>Give Suggestion</button>
             </div>
           </form>
-            
             <div v-if="res_data">
               <textarea name = "response_data" v-model="res_data" id="response_data" cols="60" rows="2"></textarea>              
             </div>
@@ -41,8 +39,26 @@
               <button type="button" @click='showAnotherStatus()'>More Suggestion</button>
               <button type="button" @click='postUpdate()'>Post Update</button>
             </div>
+            
+            <div v-if="showPost">
+              <p> <b> Mythili </b></p>
+            </div>
+            <div v-if="showPost">
+              <!-- this.postImg2 = require('../images/img_girl2.jpg'); -->
+              <img src = "../images/img_girl2.jpg" width="200" height="150">              
+            </div>
+            <div v-if="showPost">
+              <p>
+                Successfully completed all tasks
+              </p>
+            </div>
+            <div v-if="showPost">
+              <button>Like</button>
+              <button>Comment</button>
+            </div>
+
             <div v-if="postResponseStatus">
-              <p>Revathy</p>
+              <p> <b> Revathy </b> </p>
             </div>
             <div v-if="postResponseStatus">
               <img v-bind:src = "postImg" width="200" height="150">              
@@ -52,8 +68,12 @@
                 {{ postText }}
               </p>
             </div>
+            <div v-if="postResponseStatus">
+              <button>Like</button>
+              <button>Comment</button>
+            </div>
              <div v-if="postResponseStatus">
-              <p>Mythili</p>
+              <p> <b> Mythili </b></p>
             </div>
             <div v-if="postResponseStatus">
               <img v-bind:src = "postImg2" width="200" height="150">              
@@ -62,6 +82,10 @@
               <p>
                 Successfully completed all tasks
               </p>
+            </div>
+            <div v-if="postResponseStatus">
+              <button>Like</button>
+              <button>Comment</button>
             </div>
        </div>
        <section v-show="hide">
@@ -148,6 +172,7 @@ export default {
       res_data: '',
       postResponseStatus: false,
       previewImage:null,
+      showPost: true,
       show_image_preview:true,
       first: this.$first,
       courseCompleted: true,
@@ -293,6 +318,7 @@ export default {
         this.res_data = '';
         this.show_res_data = false;
         this.show_image_preview = false;
+        this.showPost = false;
       },
       uploadImage(e){
         const image = e.target.files[0];
