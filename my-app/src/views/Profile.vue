@@ -1,7 +1,7 @@
 <template>
  <div id="app">
    <nav class="main-nav">
-     <div class="logo">
+     <div class="logoMentee">
        My Profile
      </div>
      <Burger></Burger>
@@ -62,7 +62,7 @@
     <!-- </article> -->
   </div>  
  <div class="buttonStyle">
-  <button type="button" @click='getUserById()' class="btn btn-danger">show</button>&nbsp;
+  <!--<button type="button" @click='getUserById()' class="btn btn-danger">show</button>&nbsp;-->
   <router-link to="EditProfile" tag="button" class="btn btn-danger">EditProfile</router-link>
  </div>
  </div>
