@@ -2,7 +2,7 @@
  <div id="app">
    <nav class="main-nav">
      <div class="logo">
-       My Profile  😀
+       My Profile
      </div>
      <Burger></Burger>
    </nav>
@@ -19,47 +19,52 @@
    </Sidebar>
 
    <h1 v-if="awesome">Vue is awesome!</h1>
-    <h1 v-else>✨Personal Info✨</h1>
+    <h1 v-else>Personal Info</h1>
 
   <div class="Personal Info" id="info">
-    <article>
-      <th scope="row">Name:&emsp;</th><th>{{first}}</th><br>
-      <th scope="row">Email:</th><th>{{emailLogin}}</th><br>
+    <!-- <article> -->
+      <div class="personal_div">
+      <table class="personal_table">
+      <tr>
+      <th scope="row">Name:&emsp;</th><th>{{first}}</th></tr>
+      <tr>
+      <th scope="row">Email:</th><th>{{emailLogin}}</th></tr>
+      <tr>
       <th scope="row">Role:</th>
       <th v-if="displayRole"></th>
-      <th v-else>{{role}}</th>
-      <br>
+      <th v-else>{{role}}</th></tr>
+      <tr>
       <th scope="row">Age:</th>
       <th v-if="displayAge"></th>
-      <th v-else>{{age}}</th>
-      <br>
+      <th v-else>{{age}}</th></tr>
+      <tr>
       <th scope="row">Role In Genesys:</th>
       <th v-if="displayRoleInGenesys"></th>
-      <th v-else>{{job_title}}</th>
-      <br>
+      <th v-else>{{job_title}}</th></tr>
+      <tr>
       <th scope="row">Skills:</th>
       <th v-if="displaySkills"></th>
-      <th v-else>{{skills}}</th>
-      <br>
+      <th v-else>{{skills}}</th></tr>
+      <tr>
       <th scope="row">Interests:</th>
       <th v-if="displayInterests"></th>
-      <th v-else>{{interests}}</th>
-      <br>
+      <th v-else>{{interests}}</th></tr>
+      <tr>
       <th scope="row">Personal Mail Id:</th>
       <th v-if="displayPersonalEmail"></th>
-      <th v-else>{{personalMail}}</th>
-      <br>
+      <th v-else>{{personalMail}}</th></tr>
+      <tr>
       <th scope="row">Contact:</th>
       <th v-if="displayContact"></th>
-      <th v-else>{{contact}}</th>
-      <br>
-      
-    </article>
+      <th v-else>{{contact}}</th></tr>
+      </table>
+      </div>
+    <!-- </article> -->
   </div>  
- 
+ <div class="buttonStyle">
   <button type="button" @click='getUserById()' class="btn btn-danger">show</button>&nbsp;
   <router-link to="EditProfile" tag="button" class="btn btn-danger">EditProfile</router-link>
-
+ </div>
  </div>
 </template>
 <script>
@@ -137,12 +142,14 @@ export default {
       })
     }
   },
-  
+  beforeMount(){
+    this.getUserById()
+  },
 
  components: {
    Burger,
    Sidebar
- }
+ },
 }
 
 </script>
@@ -190,5 +197,40 @@ html {
   width: 70%;
   background-color: #ffffff;
   height: 500px; 
+} 
+.personal_div{
+  display: flex;
+  justify-content: center;
 }
+.personal_table{
+  align-self: center;
+  background-color: slategray;
+  border-radius: 3px;
+  width:40%;
+  font-size: 25px;
+  color: black;
+  background: rgba(255,255,255,0.12);
+  text-align: left;
+}
+.personal_table tr{
+  text-align: left;
+}
+.personal_table tr:nth-child(even) {
+    background: rgba(192, 191, 191, 0.12);
+    /* opacity: 0.2; */
+}
+
+.personal_table tr th {
+  width:50%
+}
+
+.buttonStyle {
+  display: flex;
+  justify-content: center;
+  align-self: center;
+  padding-top: 5%;
+  padding-right:2%
+}
+
+
 </style>
