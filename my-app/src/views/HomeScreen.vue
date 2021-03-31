@@ -23,79 +23,73 @@
        <div class="left-div">
          <form>
             <div class="statustextbox">
-              <label htmlFor="exampleInputEmail1">Post your status</label>
+              <h4><label htmlFor="exampleInputEmail1">What's on your mind?</label></h4>
               <div v-if="show_image_preview" >
                 <img v-bind:src = "previewImage" class="uploading-image" />
                 <input type="file" accept="image/jpeg" @change=uploadImage>
               </div>  
               <input type="text" class="form-control" v-model="req_sentence" name="req_sentence" id="req_sentence" aria-describedby="emailHelp" placeholder="how are you doing now" />
-              <button type="button" @click='showStatus()'>Give Suggestion</button>
+              <br><button type="button" @click='showStatus()'>Give Suggestion</button>
             </div>
           </form>
-            <div v-if="res_data">
+            <div v-if="res_data" class="suggestion1">
               <textarea name = "response_data" v-model="res_data" id="response_data" cols="60" rows="2"></textarea>              
             </div>
-            <div v-if="show_res_data">
+            <div v-if="show_res_data" class="suggestion2">
               <button type="button" @click='showAnotherStatus()'>More Suggestion</button>
               <button type="button" @click='postUpdate()'>Post Update</button>
             </div>
             
-            <div v-if="showPost">
-              <p> <b> Mythili </b></p>
+            <div v-if="showPost" class="showPost1">
+              <p> <b> Mythili has posted 5 hrs ago </b></p>
             </div>
-            <div v-if="showPost">
+            <div v-if="showPost" class="showPost2">
               <!-- this.postImg2 = require('../images/img_girl2.jpg'); -->
               <img src = "../images/img_girl2.jpg" width="200" height="150">              
             </div>
-            <div v-if="showPost">
+            <div v-if="showPost" class="showPost3">
               <p>
                 Successfully completed all tasks
               </p>
             </div>
-            <div v-if="showPost">
+            <div v-if="showPost" class="showPost4">
               <button>Like</button>
               <button>Comment</button>
             </div>
 
-            <div v-if="postResponseStatus">
+            <div v-if="postResponseStatus" class="showPost5">
               <p> <b> Revathy </b> </p>
             </div>
-            <div v-if="postResponseStatus">
+            <div v-if="postResponseStatus" class="showPost6">
               <img v-bind:src = "postImg" width="200" height="150">              
             </div>
-            <div v-if="postResponseStatus">
+            <div v-if="postResponseStatus" class="showPost7">
               <p>
                 {{ postText }}
               </p>
             </div>
-            <div v-if="postResponseStatus">
+            <div v-if="postResponseStatus" class="showPost8">
               <button>Like</button>
               <button>Comment</button>
             </div>
-             <div v-if="postResponseStatus">
-              <p> <b> Mythili </b></p>
+             <div v-if="postResponseStatus" class="showPost9">
+              <p> <b> Mythili has posted 5 hrs ago </b></p>
             </div>
-            <div v-if="postResponseStatus">
+            <div v-if="postResponseStatus" class="showPost10">
               <img v-bind:src = "postImg2" width="200" height="150">              
             </div>
-            <div v-if="postResponseStatus">
-              <p>
-                Successfully completed all tasks
-              </p>
-            </div>
-            <div v-if="postResponseStatus">
-              <button>Like</button>
-              <button>Comment</button>
-            </div>
+          
+            
+            
        </div>
        <section v-show="hide">
-          <article>
+        
             <!--<h1 class="statush1">Post your status</h1>
             <p>I will feeling good today</p>-->
             <form>
-              <div class="statustextbox">
+              <div class="statustextbox" >
                 <label htmlFor="exampleInputEmail1">Post your status</label>
-                <input type="text" class="form-control" v-model="req_sentence" name="req_sentence" id="req_sentence" aria-describedby="emailHelp" placeholder="how are you doing now" />
+                <input type="text" size="50" class="form-control" v-model="req_sentence" name="req_sentence" id="req_sentence" aria-describedby="emailHelp" placeholder="how are you doing now" />
                 <button type="button" @click='showStatus()'>Give Suggestion</button>
               </div>
             </form>
@@ -128,7 +122,7 @@
                 Some Text
               </p>
             </div>
-          </article>
+         
           <nav class="right-nav">
             <ul>
               <div>
@@ -349,6 +343,7 @@ html {
    font-family: 'Lato';
    height: 100%;
    background: rgb(101,31,87);
+  
    /*background: linear-gradient(45deg, rgba(101,31,87,1) 0%, rgba(225,113,87,1) 48%, rgba(249,248,113,1) 100%);*/
  }
 
@@ -390,11 +385,10 @@ html {
 }
 .left-div {
   float:left;
-  background: rgb(235, 220, 224); 
-  //background:#310;
+  /* background: rgb(235, 224, 224); */
   width: 100%;
   height:1000px;
-  border-width: 0.5cm;
+  border-width: 1cm;
   border-block-start-color: steelblue;
   padding-right: 2cm;
 }
@@ -441,6 +435,91 @@ html {
   cursor: pointer;
   position: absolute;
   right: 10%
+}
+
+.form-control{
+  width: 150%;
+}
+
+.statustextbox{
+  position:absolute;
+  left:500px;
+}
+
+.showPost1{
+    
+   position:absolute;
+    top:335px;
+      left:500px;
+}
+
+.showPost2{
+    
+   position:absolute;
+    top:360px;
+      left:500px;
+}
+
+.showPost3{
+    
+   position:absolute;
+    top:520px;
+      left:500px;
+}
+.showPost4{
+    
+   position:absolute;
+    top:550px;
+      left:500px;
+}
+
+.showPost5{
+    
+   position:absolute;
+    top:210px;
+    left:500px;
+}
+
+.showPost6{
+    
+   position:absolute;
+    top:235px;
+      left:500px;
+}
+.showPost7{
+    
+   position:absolute;
+    top:390px;
+      left:500px;
+}
+.showPost8{
+    
+   position:absolute;
+    top:420px;
+      left:500px;
+}
+.showPost9{
+    
+   position:absolute;
+    top:460px;
+      left:500px;
+}
+
+.showPost10{
+    
+   position:absolute;
+    top:490px;
+      left:500px;
+}
+.suggestion1{
+   position:absolute;
+    top:240px;
+      left:500px;
+}
+.suggestion2{
+   position:absolute;
+    top:300px;
+      left:500px;
 }
 
 .ref-course-btn{
