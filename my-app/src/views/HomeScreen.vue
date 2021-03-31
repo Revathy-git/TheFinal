@@ -1,7 +1,7 @@
 <template>
  <div id="app" class="app-class">
    <nav class="main-nav">
-     <div class="logo">
+     <div class="logoMentee">
        Welcome {{first}}
      </div>
      <Burger></Burger>
