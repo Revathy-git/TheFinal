@@ -12,7 +12,8 @@
         <button type="button" @click='clickHome()' class="btn btn-danger">Home</button><br><br>
        <a href="http://localhost:3000/calendar" tag="li" class="btn btn-danger">Calendar</a><br><br>
        <a href="http://localhost:8082/leaderboard.html" tag="li" class="btn btn-danger">LeaderBoard</a><br><br>
-       <button type="button" @click='clickMenteeView()' class="btn btn-danger">Mentee View</button><br><br>
+       <!--<button type="button" @click='clickMenteeView()' class="btn btn-danger">Mentee View</button><br><br>-->
+       <button type="button" @click='clickMentorView()' class="btn btn-danger">Mentor View</button><br><br>
        <button type="button" @click='clickProfile()' class="btn btn-danger">Profile</button><br><br>
           <a href="http://localhost:3000/mail" tag="li" class="btn btn-danger">Monthly Summary</a>
      </ul>
@@ -57,6 +58,12 @@
       <th scope="row">Contact:</th>
       <th v-if="displayContact"></th>
       <th v-else>{{contact}}</th></tr>
+      <tr v-if="mentorAssgined">
+      </tr>
+      <tr v-else>
+      <th scope="row">Mentor:</th>
+      <th>{{mentor}}</th>
+      </tr>
       </table>
       </div>
     <!-- </article> -->
@@ -74,13 +81,21 @@ import Sidebar from '@/components/Menu/Sidebar.vue';
 import {getUserById } from '../services/UserService'
 
 
-
 export default {
  name: 'app',
  mounted() {
+      //Vue.prototype.$first = this.email.split(".")[0];
+      //Vue.prototype.$email = this.email;
       console.log("mounted",this.$email);
       this.first = this.$first;
       this.emailLogin = this.$email;
+      console.log("mounted",this.first);
+
+      this.mentor = this.$mentorAssgin
+      if(this.mentor != ''){
+        this.mentorAssgined = false
+      }
+      this.getUserById()
     },
   data() {
     return {
@@ -103,7 +118,9 @@ export default {
       displaySkills:true,
       displayInterests:true,
       displayPersonalEmail:true,
-      displayContact:true
+      displayContact:true,
+      mentorAssgined: true,
+      mentor: ''
     }
   }, 
  methods: {
@@ -117,6 +134,9 @@ export default {
       clickMenteeView(){
               this.$router.push({name: 'Mentee'})
             },
+      clickMentorView(){
+        this.$router.push({name: 'Mentor'})
+      },
     getUserById() {
       getUserById(this.first).then(response => {
         console.log("profilecheck",response);
@@ -142,9 +162,16 @@ export default {
       })
     }
   },
-  beforeMount(){
+  /*beforeMount(){
+    this.first = this.$first;
+    console.log("beforemount", this.$first)
+    console.log("beforemount", this.$mentorAssgin)
+    this.mentor = this.$mentorAssgin
+    if(this.mentor != ''){
+      this.mentorAssgined = false
+    }
     this.getUserById()
-  },
+  },*/
 
  components: {
    Burger,
