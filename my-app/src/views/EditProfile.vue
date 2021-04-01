@@ -200,8 +200,7 @@ html {
    border: 0; margin: 0; padding: 0;
    font-family: 'Lato';
    height: 100%;
-   background: rgb(101,31,87);
-   background: linear-gradient(45deg, rgba(101,31,87,1) 0%, rgba(225,113,87,1) 48%, rgba(249,248,113,1) 100%);
+  background-image: url('../images/background.jpg');
  }
 
  .logo {

@@ -137,8 +137,7 @@
           </nav>
       </section>
    </div>
- <div class = "footer">
- </div>
+
  </div>
 </template>
 
@@ -342,9 +341,7 @@ html {
    border: 0; margin: 0; padding: 0;
    font-family: 'Lato';
    height: 100%;
-   background: rgb(101,31,87);
-  
-   /*background: linear-gradient(45deg, rgba(101,31,87,1) 0%, rgba(225,113,87,1) 48%, rgba(249,248,113,1) 100%);*/
+   background-image: url('../images/background.jpg');
  }
 
  .logo {
@@ -408,7 +405,7 @@ html {
   left: 0;
   bottom: 0;
   width: 100%;
-  background:  rgb(101,31,87);
+  opacity: 0.5;
   color: white;
   text-align: center;
 }
