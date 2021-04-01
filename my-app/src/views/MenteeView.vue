@@ -352,9 +352,8 @@ export default {
       this.rowData1 = []
       console.log("submitAnswers",this.rowData[0]["question"])
       //TODO: save answers to db
-      var s1,s2=72.12,s3=55.54;
-      
-      
+      var s1,s2=72.12;
+        
       validateAnswer(this.rowData[0]["question"],this.rowData[0]["answer"]).then(response => {
           console.log(response.score)
           //item.score=response.score
@@ -371,16 +370,16 @@ export default {
           console.log("item11",s1)
           this.rowData1.push({number:2,score:s2})
         })
-        validateAnswer(this.rowData[2]["question"],this.rowData[2]["answer"]).then(response => {
+        /*validateAnswer(this.rowData[2]["question"],this.rowData[2]["answer"]).then(response => {
           console.log(response.score)
           //item.score=response.score
           console.log("item",response.score)
           s3 = response.score
           console.log("item11",s1)
           this.rowData1.push({number:3,score:s3})
-        })
+        })*/
         
-        console.log("item11111",s1)
+        //console.log("item11111",s1)
         
         //this.rowData1.push({number:2,score:s2})
         //this.rowData1.push({number:3,score:s3})
