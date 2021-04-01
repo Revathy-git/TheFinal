@@ -80,6 +80,8 @@
 
 import {updateProfileInfobyId, getMyMentor} from '../services/UserService';
 import 'vuejs-noty/dist/vuejs-noty.css'
+import Vue from 'vue'
+Vue.prototype.$mentorAssgin = ""
 
 export default {
  name: 'app',
@@ -166,6 +168,9 @@ export default {
           title: 'Mentor Assigned',
           text: response.name
         });
+        this.$mentorAssgin=response.name
+        Vue.prototype.$mentorAssgin = response.name;
+        console.log("editprofile - mentorassign", this.$mentorAssgin)
         })  
         //this.$vueNoty.show("Hello world!")
         //this.$store.dispatch("notify", "Hello from Vuex")
