@@ -447,7 +447,7 @@ html {
 
  .logoMentee {
    align-self: center;
-   color: #a3c2c2;
+   color: #000000;
    font-weight: bold;
    font-family: Courier New, sans-serif;
    font-size: 2rem;
