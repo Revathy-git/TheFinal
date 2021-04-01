@@ -30,10 +30,10 @@
                   <h4><b>Revathy E</b></h4> 
                   <p>Software Engineer</p> 
                   <label for="file"><b>Goal Completion progress:</b></label>&nbsp;&nbsp;
-                  <progress id="file" value="32" max="100"> 32% </progress><br>
+                  <progress id="file" value="50" max="100"> 50% </progress><br>
                   <label><b>Your next appointment with Mentor: </b>Tomorrow at 11 am</label><br>
-                  <label><b>Total courses assigned: </b>4</label><br>
-                  <label><b>Total courses completed: </b>2</label><br>
+                  <label><b>Total goals assigned: </b>4</label><br>
+                  <label><b>Total goals completed: </b>2</label><br>
                   <div>
                     
                         <div>
@@ -191,7 +191,7 @@ article1 {
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
   transition: 0.3s;
   width: 250%;
-  background-color: #ffe6e6;
+  background-color: #d9d9d9;
 }
 
 .card:hover {
