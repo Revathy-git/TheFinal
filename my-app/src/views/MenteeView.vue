@@ -2,7 +2,6 @@
  <div id="app">
    <nav class="main-nav">
      <div class="logoMentee">
-       My View
      </div>
      <Burger></Burger>
    </nav>
@@ -40,6 +39,7 @@
                     <td><button class="markFinished" @click="toggle(task)">Mark as finished</button></td>
                 </tr>
               </table>
+              <br>
               <h2 class="subtitle">All complete goals</h2>
               <!--<ul>
                   <li class="text1" v-for="task in Completedlist" v-bind:key="task">{{ task.description }}  
@@ -51,8 +51,10 @@
                     <td><button class="markUnFinished" @click="toggle(task)">Mark as unfinished</button></td>
                 </tr>
               </table>
-              <br><br><br><br><br><br><br><br>
+              <br><br><br>
               <button type="button" class="button1" @click='getQuestions()'>Take Assessment</button>
+               <a href="https://teams.microsoft.com/l/chat/0/0?users=maithili.jampana@genesys.com&topicName=Prep%20For%20Meeting%20Tomorrow&message=Hi%20maithili" tag="li" class="buttonmentor">Connect with Mentor</a>
+
             </div>
             <div v-else>
               <h1 class="title">Final Review</h1>
@@ -81,7 +83,8 @@
             <ul>
               <div>
                 <h1 class="righth1">Goal Progress</h1>
-                <button type="button" @click='getCourseCompletionList()' class="ref-course-btn">RefreshGoals</button>
+                <br>
+                <button type="button"  @click='getCourseCompletionList()' class="ref-course-btn">RefreshGoals</button>
                 <p class="nocourse" v-if="courseCompleted">No goals assigned</p>
                 <div id="chart" class="viewChart" v-else>
                   <apexchart type="donut" :options="chartOptions" :series="series"></apexchart>
@@ -92,20 +95,7 @@
             </ul>
           </nav>
           
-          <nav class="click-chat1">
-            <ul>
-              <div>
-                <br><br><br><br><br><br><br><br><br>
-                <!--<h1 class="chat">Chat with your mentor</h1>-->
-                    <div class="text-left">
-                      <a class="btn btn-success me-2" href="https://teams.microsoft.com/l/chat/0/0?users=maithili.jampana@genesys.com&topicName=Prep%20For%20Meeting%20Tomorrow&message=Hi%20maithili" target="_blank" role="button">Connect with Mentor
-                      <i class="fas fa-download"></i></a>
-
-                    </div>
-              </div>
-            </ul>
-
-          </nav>      
+     
       </section>
    </div>
  </div>
@@ -520,6 +510,8 @@ nav ul {
   padding: 40px;
   width: 70%;
   left : -90px;
+     font-size: 25px;
+
   height: 600px; /* only for demonstration, should be removed */
 }
 
@@ -531,25 +523,29 @@ nav ul {
 
 .righth1{
    text-align: left;
-   font-size: 1.5rem;
-   color: #4CAF50;
+   font-size: 30px;
+   color: #c70000;
    left: 60px;
    font-weight: bold;
    position: absolute;
    top: 60px; 
    left: 1000px;
+   font-family: Arial, Helvetica, sans-serif;
+
 }
 
 .nocourse{
    text-align: left;
    font-size: 1rem;
-   color: #ff3399;
+   color: #c70000;
    top: 55%;
    right: 14%;
    font-weight: bold;
    position: absolute;
    top: 120px; 
    left: 1000px;
+   font-family: Arial, Helvetica, sans-serif;
+
 }
 
 .button1{
@@ -559,14 +555,29 @@ nav ul {
    border: none;
    color: white;
     text-align: center;
-     margin: 3px 2px;
+     margin: 3px 25px;
      cursor: pointer;
-  position: absolute;
+  position: inherit;
   right: -10px;
   left:50px;
-   font-size: 16px;
-}
+   font-size: 20px;
+      width:200px;
 
+}
+.buttonmentor{
+   background-color: #4CAF50;
+   display: inline-block;
+   border: none;
+   color: white;
+    text-align: center;
+     margin: 3px 2px;
+     cursor: pointer;
+  position: inherit;
+  right: -10px;
+  left:50px;
+   font-size: 20px;
+   width:200px;
+}
 .ref-course-btn{
   background-color: #4CAF50;
   border: none;
@@ -575,7 +586,7 @@ nav ul {
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 16px;
+  font-size: 18px;
   margin: 3px 2px;
   cursor: pointer;
   position: absolute;
@@ -593,16 +604,17 @@ nav ul {
 
 .title{
   text-align: left;
-  font-size: 30px;
-  color: #ffcc00;
+  font-size: 35px;
+  font-weight: bold;
+  color: #c70000;
   left : 10px;
   font-family: Arial, Helvetica, sans-serif;
 }
 
 .subtitle{
   text-align: left;
-  font-size: 24px;
-  color: orange;
+  font-size: 30px;
+  color: #c70000;
   font-family: Arial, Helvetica, sans-serif;
 }
 
@@ -613,7 +625,7 @@ nav ul {
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 16px;
+  font-size: 18px;
   margin: 3px 2px;
   cursor: pointer;
   top: 53%;
@@ -627,7 +639,7 @@ nav ul {
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 16px;
+  font-size: 18px;
   margin: 3px 2px;
   cursor: pointer;
   top: 53%;

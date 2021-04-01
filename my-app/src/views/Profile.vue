@@ -2,7 +2,7 @@
  <div id="app">
    <nav class="main-nav">
      <div class="logoMentee">
-       My Profile
+      
      </div>
      <Burger></Burger>
    </nav>
@@ -18,9 +18,11 @@
           <a href="http://localhost:3000/mail" tag="li" class="btn btn-danger">Monthly Summary</a>
      </ul>
    </Sidebar>
+      <div class="infopersonal">
 
-   <h1 v-if="awesome">Vue is awesome!</h1>
-    <h1 v-else>Personal Info</h1>
+   <div v-if="awesome">Vue is awesome!</div>
+    <h1 v-else >PERSONAL INFO</h1>
+      </div>
 
   <div class="Personal Info" id="info">
     <!-- <article> -->
@@ -228,6 +230,13 @@ html {
   display: flex;
   justify-content: center;
 }
+.infopersonal{
+  display: flex;
+  justify-content: center;
+     font-weight: bold;
+       color: #c70000;
+
+}
 .personal_table{
   align-self: center;
   background-color: slategray;
@@ -257,6 +266,12 @@ html {
   padding-top: 5%;
   padding-right:2%
 }
-
+.subtitle{
+    align-self: center;
+  text-align: center;
+  font-size: 24px;
+  color: #c70000;
+  font-family: Arial, Helvetica, sans-serif;
+}
 
 </style>
