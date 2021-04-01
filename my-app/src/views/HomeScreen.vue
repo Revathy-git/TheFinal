@@ -537,9 +537,10 @@ html {
   top: 55%;
   right: 20%
 }
-/* .uploading-image{
-  width: 200px;
-  height: 150px;
-} */
+ .uploading-image{
+  width: 80px;
+  height: 80px;
+  
+} 
 
 </style>
